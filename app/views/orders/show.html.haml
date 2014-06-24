@@ -1,0 +1,52 @@
+%p#notice= notice
+
+%p
+  %b Order date:
+  = @object.order_date
+%p
+  %b Order number:
+  = @object.order_number
+%p
+  %b Provider:
+  = @object.provider_id
+%p
+
+%table
+  %tr
+    %th Order date
+    %th Order number
+    %th Total items
+    %th Total amount
+    %th Status
+    %th
+
+  - @object.order_items.each do |item|
+    %tr
+      %td= item.t_code
+      %td= item.model
+      %td= item.sn_code
+      %td= item.price
+      %td= item.mobile_number
+      %td= item.status
+      %td
+        = link_to 'Show', item
+        |
+        = link_to 'Edit', edit_order_item_path(item)
+        |
+        = link_to 'Destroy', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%p
+  %b Total items:
+  = @object.total_items
+%p
+  %b Total amount:
+  = @object.total_amount
+%p
+  %b Status:
+  = @object.status
+
+= link_to 'Back', orders_path
+\|
+= link_to 'Edit', edit_order_path(@object)
+\|
+= link_to 'Destroy', @object, :method => :delete, :data => { :confirm => 'Are you sure?' }

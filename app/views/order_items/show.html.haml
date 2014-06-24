@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Order:
+  = @order_item.order_id
+%p
+  %b T code:
+  = @order_item.t_code
+%p
+  %b Model:
+  = @order_item.model
+%p
+  %b Sn code:
+  = @order_item.sn_code
+%p
+  %b Price:
+  = @order_item.price
+%p
+  %b Mobile number:
+  = @order_item.mobile_number
+%p
+  %b Status:
+  = @order_item.status
+
+= link_to 'Edit', edit_order_item_path(@order_item)
+\|
+= link_to 'Back', order_items_path

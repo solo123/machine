@@ -1,0 +1,24 @@
+%table
+  %tr
+    %th Order date
+    %th Order number
+    %th Total items
+    %th Total amount
+    %th Status
+    %th
+
+  - @collection.each do |order|
+    %tr
+      %td= order.order_date
+      %td= order.order_number
+      %td= order.total_items
+      %td= order.total_amount
+      %td= order.status
+      %td
+        = link_to 'Show', order
+        |
+        = link_to 'Edit', edit_order_path(order)
+
+%br
+
+= link_to 'New Order', new_order_path
