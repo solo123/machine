@@ -35,7 +35,24 @@ class OrdersController < ResourcesController
       order.save
       @object = order
     end
-    flash[:notice] = "导入#{imp_lines}行数据。"
+    flash[:notice] = "导入#{imp_lines}行数据。".html_safe
+  end
+  def stock_in
+    i = 0
+    params['item_ids'].each do |oid|
+      item = OrderItem.find(oid)
+      if item.status == 0
+        item.status = 1
+        item.save
+        i += 1
+      end
+    end
+    if i > 0
+      flash[:notice] = "成功入库 #{i} 条记录!"
+    else
+      flash[:alert] = "没有新入库记录！"
+    end
+    redirect_to Order.find(params[:id])
   end
 
   private

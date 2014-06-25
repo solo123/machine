@@ -1,0 +1,28 @@
+/ Static navbar
+.navbar.navbar-default.navbar-static-top
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand{:href => "/"} 
+        = image_tag(("wooul-logo.png"), :alt => "POS进出库管理系统")
+        渠道系统
+    .navbar-collapse.collapse
+      %ul.nav.navbar-nav
+        %li= link_to '订单数据', orders_path
+
+      %ul.nav.navbar-nav.navbar-right
+        - if false #current_user
+          %li 
+            %strong.welcome 
+              欢迎 #{current_user.username}! 
+              - if current_user.admin?
+                [Admin]
+          %li= link_to '退出登录', destroy_user_session_path, method: 'delete'
+        - else
+          %li 
+            %span.pleaselogin 请登录！
+    / /.nav-collapse
+

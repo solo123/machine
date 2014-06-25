@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     collection do
       post :import
     end
+    member do
+      post :stock_in
+    end
   end
 
 
