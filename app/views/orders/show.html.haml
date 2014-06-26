@@ -24,7 +24,7 @@
 
     - @object.order_items.each do |item|
       %tr
-        %td= check_box_tag "item_ids[]", item.id
+        %td= check_box_tag "item_ids[]", item.id if item.status == 0
         %td= item.t_code
         %td= item.model
         %td= item.sn_code

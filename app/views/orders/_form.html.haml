@@ -2,9 +2,8 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :order_date
-    = f.input :provider_id
-    = f.input :status
+    = f.association :provider
+    = text_area_tag 'import_text', '', class: 'form-control', placeholder: '复制粘贴POS预装机出机数据到这里', :rows => 10
 
   .form-actions
-    = f.button :submit
+    = f.submit '提交', class: 'btn btn-default'

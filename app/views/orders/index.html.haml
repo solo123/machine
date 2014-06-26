@@ -1,24 +1,33 @@
+%ul.nav.nav-tabs
+  %li{class: "#{params[:cat] ? '' : 'active'}"}
+    = link_to "新入库", orders_path
+  %li{class: "#{params[:cat] ? 'active' : ''}"}
+    = link_to '全部', orders_path + "?cat=1"
+        
+
 %table.table.table-bordered.table-striped.table-hover
   %tr
-    %th Order date
-    %th Order number
-    %th Total items
-    %th Total amount
-    %th Status
+    %th 订单日期
+    %th 订单号
+    %th 供应商
+    %th 数量
+    %th 金额
+    %th 状态
     %th
 
   - @collection.each do |order|
     %tr
       %td= order.order_date
       %td= order.order_number
+      %td= order.provider_id
       %td= order.total_items
       %td= order.total_amount
       %td= order.status
       %td
-        = link_to 'Show', order
+        = link_to '详情', order
         |
-        = link_to 'Edit', edit_order_path(order)
+        = link_to '修改', edit_order_path(order)
 
 %br
 
-= link_to 'New Order', new_order_path
+= link_to '新入库', new_order_path

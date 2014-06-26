@@ -1,21 +1,28 @@
 class OrdersController < ResourcesController
-  def import
+  def index
+    load_collection
+    unless params[:cat]
+      @collection = @collection.where(status: 0)
+    end
+  end
+  def create
     lines = params['import_text'].split(/\n/)
     imp_lines = 0
     amount = 0.0
     order = nil
     lines.each do |line|
       cs = line.split(/[\t]/)
+      if cs.length>10 && cs[4] == '801075599990010'
+        unless order
+          order = Order.new
+          order.order_date = Date.strptime(cs[0], '%m/%d/%Y')
+          order.order_number = cs[3]
+          order.provider_id = params[:order][:provider_id]
 ##=begin      
       cs.each_with_index do |c, idx|
         puts "cs[#{idx}] = #{cs[idx]}"
       end
 ##=end
-      if cs.length>10 && cs[4] == '801075599990010'
-        unless order
-          order = Order.new
-          order.order_date = cs[0]
-          order.order_number = cs[3]
         end
         oi = order.order_items.build
         oi.t_code = cs[6]
@@ -36,15 +43,21 @@ class OrdersController < ResourcesController
       @object = order
     end
     flash[:notice] = "导入#{imp_lines}行数据。".html_safe
+    redirect_to @object
   end
   def stock_in
+    load_object
+    return if @object.status > 0
+
     i = 0
-    params['item_ids'].each do |oid|
-      item = OrderItem.find(oid)
-      if item.status == 0
-        item.status = 1
-        item.save
-        i += 1
+    if params['item_ids']
+      params['item_ids'].each do |oid|
+        item = OrderItem.find(oid)
+        if item.status == 0
+          item.status = 1
+          item.save
+          i += 1
+        end
       end
     end
     if i > 0
@@ -52,7 +65,11 @@ class OrdersController < ResourcesController
     else
       flash[:alert] = "没有新入库记录！"
     end
-    redirect_to Order.find(params[:id])
+    if @object.order_items.where(status: 0).count == 0 && @object.status == 0
+      @object.status = 1
+      @object.save
+    end
+    redirect_to @object
   end
 
   private

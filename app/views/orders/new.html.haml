@@ -1,10 +1,5 @@
-%h1 New order
+%h1 POS机订单
 
 = render 'form'
-
-= form_tag import_orders_path, remote: true do 
-  .form-group
-    = text_area_tag 'import_text', '', class: 'form-control', placeholder: '复制粘贴交易数据到这里', :rows => 10
-    = submit_tag
 
 = link_to 'Back', orders_path
