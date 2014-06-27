@@ -1,6 +1,7 @@
 class CreateOrderItems < ActiveRecord::Migration
   def change
     create_table :order_items do |t|
+      t.integer :provider_id
       t.integer :order_id
       t.string :t_code
       t.string :model

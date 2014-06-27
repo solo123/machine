@@ -15,9 +15,9 @@
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li.active
-          %a{:href => "#"} Link
+          = link_to '入库', orders_path
         %li
-          %a{:href => "#"} Link
+          = link_to '出库', order_items_path
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             Dropdown

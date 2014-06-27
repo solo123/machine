@@ -47,29 +47,29 @@ class OrdersController < ResourcesController
   end
   def stock_in
     load_object
-    return if @object.status > 0
+    return if @object.valid_for_stock_in
 
     i = 0
-    if params['item_ids']
-      params['item_ids'].each do |oid|
-        item = OrderItem.find(oid)
-        if item.status == 0
-          item.status = 1
-          item.save
-          i += 1
-        end
+    @object.order_items.each do |item|
+      if item.status == 0
+        item.provider = @object.provider
+        item.status = 1
+        item.save
+        i += 1
       end
     end
-    if i > 0
-      flash[:notice] = "成功入库 #{i} 条记录!"
-    else
-      flash[:alert] = "没有新入库记录！"
-    end
-    if @object.order_items.where(status: 0).count == 0 && @object.status == 0
-      @object.status = 1
-      @object.save
-    end
+    @object.status = 1
+    @object.save
+    flash[:notice] = "成功入库 #{i} 台POS机!"
     redirect_to @object
+  end
+
+  def destroy
+    load_object
+    if @object.status == 0
+      @object.destroy
+    end
+    redirect_to :action => :index
   end
 
   private

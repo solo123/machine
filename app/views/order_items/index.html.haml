@@ -1,6 +1,8 @@
-%h1 Listing order_items
-
-%table
+.toolbox
+  .input-group
+    %span.input-group-addon 终端编号
+    = text_field_tag 't_code', '', class: "form-control filter", placeholder: "终端编号"
+%table.table.table-bordered.table-striped.table-hover.search-table
   %tr
     %th Order
     %th T code
@@ -9,11 +11,8 @@
     %th Price
     %th Mobile number
     %th Status
-    %th
-    %th
-    %th
 
-  - @order_items.each do |order_item|
+  - @collection.each do |order_item|
     %tr
       %td= order_item.order_id
       %td= order_item.t_code
@@ -22,9 +21,6 @@
       %td= order_item.price
       %td= order_item.mobile_number
       %td= order_item.status
-      %td= link_to 'Show', order_item
-      %td= link_to 'Edit', edit_order_item_path(order_item)
-      %td= link_to 'Destroy', order_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
