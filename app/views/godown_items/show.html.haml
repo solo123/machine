@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b Godown entry:
+  = @godown_item.godown_entry_id
+%p
+  %b Product:
+  = @godown_item.product_id
+%p
+  %b Terminal code:
+  = @godown_item.terminal_code
+%p
+  %b Model:
+  = @godown_item.model
+%p
+  %b Sn code:
+  = @godown_item.sn_code
+%p
+  %b Price:
+  = @godown_item.price
+%p
+  %b Items:
+  = @godown_item.items
+%p
+  %b Amount:
+  = @godown_item.amount
+%p
+  %b Status:
+  = @godown_item.status
+
+= link_to 'Edit', edit_godown_item_path(@godown_item)
+\|
+= link_to 'Back', godown_items_path

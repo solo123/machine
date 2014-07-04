@@ -1,0 +1,35 @@
+%h1 Listing deliveries
+
+%table
+  %tr
+    %th Delivery number
+    %th Partner
+    %th Delivery date
+    %th Total items
+    %th Total amount
+    %th Creator
+    %th Delivery staff
+    %th Accounting voucher number
+    %th Status
+    %th
+    %th
+    %th
+
+  - @collection.each do |delivery|
+    %tr
+      %td= delivery.delivery_number
+      %td= delivery.partner_id
+      %td= delivery.delivery_date
+      %td= delivery.total_items
+      %td= delivery.total_amount
+      %td= delivery.creator_id
+      %td= delivery.delivery_staff_id
+      %td= delivery.accounting_voucher_number
+      %td= delivery.status
+      %td= link_to 'Show', delivery
+      %td= link_to 'Edit', edit_delivery_path(delivery)
+      %td= link_to 'Destroy', delivery, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Delivery', new_delivery_path

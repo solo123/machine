@@ -1,0 +1,31 @@
+%h1 Listing delivery_items
+
+%table
+  %tr
+    %th Delivery
+    %th T code
+    %th Item name
+    %th Items
+    %th Price
+    %th Amount
+    %th Status
+    %th
+    %th
+    %th
+
+  - @delivery_items.each do |delivery_item|
+    %tr
+      %td= delivery_item.delivery_id
+      %td= delivery_item.t_code
+      %td= delivery_item.item_name
+      %td= delivery_item.items
+      %td= delivery_item.price
+      %td= delivery_item.amount
+      %td= delivery_item.status
+      %td= link_to 'Show', delivery_item
+      %td= link_to 'Edit', edit_delivery_item_path(delivery_item)
+      %td= link_to 'Destroy', delivery_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Delivery item', new_delivery_item_path

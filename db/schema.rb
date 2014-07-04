@@ -11,7 +11,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623052808) do
+ActiveRecord::Schema.define(version: 20140702025503) do
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "manager"
+    t.string   "tel"
+    t.string   "email"
+    t.string   "qq"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "deliveries", force: true do |t|
+    t.string   "delivery_number"
+    t.integer  "partner_id"
+    t.date     "delivery_date"
+    t.integer  "total_items"
+    t.decimal  "total_amount"
+    t.integer  "creator_id"
+    t.integer  "delivery_staff_id"
+    t.string   "accounting_voucher_number"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "delivery_items", force: true do |t|
+    t.integer  "delivery_id"
+    t.string   "t_code"
+    t.string   "item_name"
+    t.integer  "items"
+    t.decimal  "price"
+    t.decimal  "amount"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "godown_entries", force: true do |t|
+    t.string   "godown_number"
+    t.integer  "total_items"
+    t.decimal  "total_amount",  precision: 2, scale: 12
+    t.integer  "status",                                 default: 0
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "godown_items", force: true do |t|
+    t.integer  "godown_entry_id"
+    t.integer  "product_id"
+    t.string   "terminal_code"
+    t.string   "model"
+    t.string   "sn_code"
+    t.decimal  "price",           precision: 2, scale: 12
+    t.integer  "items",                                    default: 1
+    t.decimal  "amount",          precision: 2, scale: 12
+    t.integer  "status",                                   default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "order_items", force: true do |t|
     t.integer  "order_id"
@@ -36,9 +98,39 @@ ActiveRecord::Schema.define(version: 20140623052808) do
     t.datetime "updated_at"
   end
 
+  create_table "partners", force: true do |t|
+    t.string   "company_name"
+    t.string   "contact"
+    t.string   "tel"
+    t.string   "email"
+    t.string   "qq"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", force: true do |t|
+    t.string   "name"
+    t.string   "catalog"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "providers", force: true do |t|
     t.string   "name"
     t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "staffs", force: true do |t|
+    t.string   "name"
+    t.string   "tel"
+    t.string   "email"
+    t.string   "position"
+    t.string   "qq"
+    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

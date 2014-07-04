@@ -1,0 +1,26 @@
+%h1 Listing products
+
+%table.table.table-bordered.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Catalog
+      %th Status
+      %th
+
+  %tbody
+    - @collection.each do |product|
+      %tr
+        %td= product.name
+        %td= product.catalog
+        %td= product.status
+        %td
+          = link_to 'Show', product
+          |
+          = link_to 'Edit', edit_product_path(product)
+          |
+          = link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Product', new_product_path

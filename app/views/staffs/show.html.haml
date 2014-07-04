@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @staff.name
+%p
+  %b Tel:
+  = @staff.tel
+%p
+  %b Email:
+  = @staff.email
+%p
+  %b Position:
+  = @staff.position
+%p
+  %b Qq:
+  = @staff.qq
+%p
+  %b Company:
+  = @staff.company_id
+
+= link_to 'Edit', edit_staff_path(@staff)
+\|
+= link_to 'Back', staffs_path

@@ -1,0 +1,31 @@
+%p
+  %b Delivery number:
+  = @delivery.delivery_number
+%p
+  %b Partner:
+  = @delivery.partner_id
+%p
+  %b Delivery date:
+  = @delivery.delivery_date
+%p
+  %b Total items:
+  = @delivery.total_items
+%p
+  %b Total amount:
+  = @delivery.total_amount
+%p
+  %b Creator:
+  = @delivery.creator_id
+%p
+  %b Delivery staff:
+  = @delivery.delivery_staff_id
+%p
+  %b Accounting voucher number:
+  = @delivery.accounting_voucher_number
+%p
+  %b Status:
+  = @delivery.status
+
+= link_to 'Edit', edit_delivery_path(@object)
+\|
+= link_to 'Back', deliveries_path

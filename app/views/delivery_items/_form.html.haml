@@ -1,0 +1,14 @@
+= simple_form_for(@delivery_item) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :delivery_id
+    = f.input :t_code
+    = f.input :item_name
+    = f.input :items
+    = f.input :price
+    = f.input :amount
+    = f.input :status
+
+  .form-actions
+    = f.button :submit

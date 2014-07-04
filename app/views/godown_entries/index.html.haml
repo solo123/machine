@@ -1,0 +1,27 @@
+%h1 Listing godown_entries
+
+%table
+  %tr
+    %th Godown number
+    %th Total items
+    %th Total amount
+    %th Status
+    %th Creator
+    %th
+    %th
+    %th
+
+  - @collection.each do |godown_entry|
+    %tr
+      %td= godown_entry.godown_number
+      %td= godown_entry.total_items
+      %td= godown_entry.total_amount
+      %td= godown_entry.status
+      %td= godown_entry.creator_id
+      %td= link_to 'Show', godown_entry
+      %td= link_to 'Edit', edit_godown_entry_path(godown_entry)
+      %td= link_to 'Destroy', godown_entry, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Godown entry', new_godown_entry_path

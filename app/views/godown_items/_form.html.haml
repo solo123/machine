@@ -1,0 +1,16 @@
+= simple_form_for(@godown_item) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :godown_entry_id
+    = f.input :product_id
+    = f.input :terminal_code
+    = f.input :model
+    = f.input :sn_code
+    = f.input :price
+    = f.input :items
+    = f.input :amount
+    = f.input :status
+
+  .form-actions
+    = f.button :submit

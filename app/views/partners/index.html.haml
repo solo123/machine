@@ -1,0 +1,29 @@
+%h1 Listing partners
+
+%table
+  %tr
+    %th Company name
+    %th Contact
+    %th Tel
+    %th Email
+    %th Qq
+    %th Status
+    %th
+    %th
+    %th
+
+  - @partners.each do |partner|
+    %tr
+      %td= partner.company_name
+      %td= partner.contact
+      %td= partner.tel
+      %td= partner.email
+      %td= partner.qq
+      %td= partner.status
+      %td= link_to 'Show', partner
+      %td= link_to 'Edit', edit_partner_path(partner)
+      %td= link_to 'Destroy', partner, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Partner', new_partner_path

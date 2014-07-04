@@ -47,20 +47,11 @@ class OrdersController < ResourcesController
   end
   def stock_in
     load_object
-    return if @object.valid_for_stock_in
-
-    i = 0
-    @object.order_items.each do |item|
-      if item.status == 0
-        item.provider = @object.provider
-        item.status = 1
-        item.save
-        i += 1
-      end
+    if @object.stock_in
+      flash[:notice] = "成功入库 #{@object.total_items} 台POS机!"
+    else
+      flash[:error] = '入库不成功，请检查！'
     end
-    @object.status = 1
-    @object.save
-    flash[:notice] = "成功入库 #{i} 台POS机!"
     redirect_to @object
   end
 

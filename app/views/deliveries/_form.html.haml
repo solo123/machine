@@ -1,0 +1,16 @@
+= simple_form_for(@object) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :delivery_number
+    = f.input :partner_id
+    = f.input :delivery_date
+    = f.input :total_items
+    = f.input :total_amount
+    = f.input :creator_id
+    = f.input :delivery_staff_id
+    = f.input :accounting_voucher_number
+    = f.input :status
+
+  .form-actions
+    = f.button :submit

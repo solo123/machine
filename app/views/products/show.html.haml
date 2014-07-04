@@ -1,0 +1,13 @@
+%p
+  %b Name:
+  = @object.name
+%p
+  %b Catalog:
+  = @object.catalog
+%p
+  %b Status:
+  = @object.status
+
+= link_to 'Edit', edit_product_path(@object)
+\|
+= link_to 'Back', products_path

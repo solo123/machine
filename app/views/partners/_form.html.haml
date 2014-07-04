@@ -1,0 +1,13 @@
+= simple_form_for(@partner) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :company_name
+    = f.input :contact
+    = f.input :tel
+    = f.input :email
+    = f.input :qq
+    = f.input :status
+
+  .form-actions
+    = f.button :submit

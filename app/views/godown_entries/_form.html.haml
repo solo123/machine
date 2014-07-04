@@ -1,0 +1,14 @@
+= simple_form_for(@object, url: import_godown_entries_path) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :godown_number
+    = f.input :product_id
+    = f.input :import_text, as: :text
+    = @object.total_items
+    = @object.total_amount
+    = @object.status
+    = @object.creator_id
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Delivery:
+  = @delivery_item.delivery_id
+%p
+  %b T code:
+  = @delivery_item.t_code
+%p
+  %b Item name:
+  = @delivery_item.item_name
+%p
+  %b Items:
+  = @delivery_item.items
+%p
+  %b Price:
+  = @delivery_item.price
+%p
+  %b Amount:
+  = @delivery_item.amount
+%p
+  %b Status:
+  = @delivery_item.status
+
+= link_to 'Edit', edit_delivery_item_path(@delivery_item)
+\|
+= link_to 'Back', delivery_items_path

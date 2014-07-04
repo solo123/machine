@@ -1,0 +1,51 @@
+%p
+  %b Godown number:
+  = @object.godown_number
+%p
+  %b Total items:
+  = @object.total_items
+%p
+  %b Total amount:
+  = @object.total_amount
+%p
+  %b Status:
+  = @object.status
+%p
+  %b Creator:
+  = @object.creator_id
+
+= link_to 'Edit', edit_godown_entry_path(@object)
+\|
+= link_to 'Back', godown_entries_path
+
+
+%table
+  %tr
+    %th Godown entry
+    %th Product
+    %th Terminal code
+    %th Model
+    %th Sn code
+    %th Price
+    %th Items
+    %th Amount
+    %th Status
+    %th
+    %th
+    %th
+
+  - @object.godown_items.each do |godown_item|
+    %tr
+      %td= godown_item.godown_entry_id
+      %td= godown_item.product_id
+      %td= godown_item.terminal_code
+      %td= godown_item.model
+      %td= godown_item.sn_code
+      %td= godown_item.price
+      %td= godown_item.items
+      %td= godown_item.amount
+      %td= godown_item.status
+      %td= link_to 'Show', godown_item
+      %td= link_to 'Edit', edit_godown_item_path(godown_item)
+      %td= link_to 'Destroy', godown_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
