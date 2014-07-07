@@ -5,8 +5,14 @@ class GodownEntry < ActiveRecord::Base
 
   def import
     # 型号，终端号，序列号，价格，数量
-    return false unless self.import_text
-    return false unless self.product_id
+    unless self.import_text
+      self.errors[:base] << 'Empty import text'
+      return false
+    end
+    unless self.product_id
+      self.errors[:base] << 'No product_id'
+      return false
+    end
 
     lines = import_text.split(/\n/)
     imp_lines = 0
@@ -29,9 +35,38 @@ class GodownEntry < ActiveRecord::Base
         #puts "#{cs[0]},#{cs[1]},#{cs[2]},#{cs[3]},#{cs[4]}"
       end
     end
-    self.save
+    self.save!
+    recaculate
+  end
+
+  def recaculate
     self.total_items = self.godown_items.count
     self.total_amount = self.godown_items.sum(:amount)
-    self.save
+    self.save!
+  end
+
+  def valid_for_godown
+    self.errors.clear
+    if !GodownEntry.where(godown_number: self.godown_number).where('status > 0').empty?
+      self.errors[:base] << "Duplicate godown number #{self.godown_number}"
+      false
+    elsif self.total_items == nil || self.total_items < 1 || self.total_amount == nil || self.total_amount == 0
+      self.errors[:base] << 'No godown items'
+      false
+    else
+      true
+    end
+  end
+
+  def do_godown
+    valid_for_godown
+    return false unless self.errors.empty?
+
+    self.godown_items.each do |item|
+      item.status = 1
+      item.save!
+    end
+    self.status = 1
+    self.save!
   end
 end

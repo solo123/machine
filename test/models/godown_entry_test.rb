@@ -45,7 +45,9 @@ model_1\tt_001\tsn_001\t123.45\t0
 model_2\tt_002\tsn_002\t9.99\t2
 >)    
     assert gd.import
-
-
+    assert gd.valid_for_godown, 'data ready godown'
+    
+    assert gd.do_godown, 'DO godown!'
+    assert_equal 1, gd.status
   end
 end
