@@ -17,6 +17,10 @@
 = link_to 'Edit', edit_godown_entry_path(@object)
 \|
 = link_to 'Back', godown_entries_path
+|
+= link_to '检查', check_godown_entry_path(@object)
+|
+= link_to '入库', do_import_godown_entry_path(@object)
 
 
 %table

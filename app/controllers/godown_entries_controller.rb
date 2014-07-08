@@ -7,16 +7,23 @@ class GodownEntriesController < ResourcesController
     end
     redirect_to @object
   end
+  def check
+    load_object
+    unless @object.valid_for_godown
+      flash[:error] = @object.errors.messages.to_
+    end
+    redirect_to @object
+  end
 
-  def valid_for_godown
-    return false unless self.godown_number
-    return false if GodownEntry.where(godown_number: self.godown_number)
-    return false if self.total_items
+  def do_import
+    load_object
+    @object.do_godown
+    redirect_to @object
   end
 
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def godown_entry_params
-      params.require(:godown_entry).permit(:godown_number, :total_items, :total_amount, :status, :creator_id)
+      params.require(:godown_entry).permit(:godown_number, :product_id, :total_items, :total_amount, :status, :creator_id)
     end
 end

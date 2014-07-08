@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702025503) do
+ActiveRecord::Schema.define(version: 20140708015516) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -25,34 +25,27 @@ ActiveRecord::Schema.define(version: 20140702025503) do
     t.datetime "updated_at"
   end
 
-  create_table "deliveries", force: true do |t|
-    t.string   "delivery_number"
-    t.integer  "partner_id"
-    t.date     "delivery_date"
-    t.integer  "total_items"
-    t.decimal  "total_amount"
-    t.integer  "creator_id"
-    t.integer  "delivery_staff_id"
-    t.string   "accounting_voucher_number"
-    t.integer  "status"
+  create_table "employees", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "delivery_items", force: true do |t|
-    t.integer  "delivery_id"
-    t.string   "t_code"
-    t.string   "item_name"
-    t.integer  "items"
-    t.decimal  "price"
-    t.decimal  "amount"
-    t.integer  "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "employees", ["email"], name: "index_employees_on_email", unique: true
+  add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
 
   create_table "godown_entries", force: true do |t|
     t.string   "godown_number"
+    t.integer  "product_id"
     t.integer  "total_items"
     t.decimal  "total_amount",  precision: 2, scale: 12
     t.integer  "status",                                 default: 0
@@ -77,12 +70,13 @@ ActiveRecord::Schema.define(version: 20140702025503) do
 
   create_table "order_items", force: true do |t|
     t.integer  "order_id"
+    t.integer  "product_id"
     t.string   "t_code"
     t.string   "model"
-    t.string   "sn_code"
-    t.decimal  "price"
+    t.decimal  "price",         precision: 2, scale: 12
     t.string   "mobile_number"
-    t.integer  "status"
+    t.string   "notes"
+    t.integer  "status",                                 default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -90,16 +84,21 @@ ActiveRecord::Schema.define(version: 20140702025503) do
   create_table "orders", force: true do |t|
     t.date     "order_date"
     t.string   "order_number"
-    t.integer  "provider_id"
-    t.integer  "total_items",                           default: 0
-    t.decimal  "total_amount", precision: 2, scale: 12
-    t.integer  "status",                                default: 0
+    t.integer  "partner_id"
+    t.string   "contact_name"
+    t.string   "contact_tel"
+    t.string   "contact_email"
+    t.integer  "total_items",                            default: 0
+    t.decimal  "total_amount",  precision: 2, scale: 12
+    t.string   "notes"
+    t.integer  "order_type",                             default: 0
+    t.integer  "status",                                 default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "partners", force: true do |t|
-    t.string   "company_name"
+    t.string   "partner_name"
     t.string   "contact"
     t.string   "tel"
     t.string   "email"
@@ -112,13 +111,6 @@ ActiveRecord::Schema.define(version: 20140702025503) do
   create_table "products", force: true do |t|
     t.string   "name"
     t.string   "catalog"
-    t.integer  "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "providers", force: true do |t|
-    t.string   "name"
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"

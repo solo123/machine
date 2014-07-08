@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
   has_many :order_items, dependent: :destroy
-  belongs_to :provider
+  belongs_to :partner
 
   attr_accessor :foo
   def valid_for_stock_in

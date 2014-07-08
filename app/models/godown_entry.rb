@@ -1,7 +1,7 @@
 class GodownEntry < ActiveRecord::Base
   has_many :godown_items
+  belongs_to :product
   attr_accessor :import_text
-  attr_accessor :product_id
 
   def import
     # 型号，终端号，序列号，价格，数量

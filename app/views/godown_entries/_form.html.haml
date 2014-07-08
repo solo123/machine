@@ -3,7 +3,8 @@
 
   .form-inputs
     = f.input :godown_number
-    = f.input :product_id
+    = f.association :product
+    | 型号 | 终端号 | 机身序号 | 价格 | 数量 |
     = f.input :import_text, as: :text
     = @object.total_items
     = @object.total_amount

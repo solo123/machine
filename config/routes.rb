@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :employees
   resources :godown_items
 
   resources :godown_entries do
-    collection do
-      post :import
+    member do
+      get :do_import
+      get :check
     end
   end
 
@@ -30,6 +32,7 @@ Rails.application.routes.draw do
     end
     member do
       post :stock_in
+      post :add_item
     end
   end
 

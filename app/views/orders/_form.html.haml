@@ -1,9 +1,14 @@
 = simple_form_for(@object) do |f|
   = f.error_notification
 
+
   .form-inputs
-    = f.association :provider
-    = text_area_tag 'import_text', '', class: 'form-control', placeholder: '复制粘贴POS预装机出机数据到这里', :rows => 10
+    = f.input :order_number
+    = f.association :partner
+    = f.input :contact_name
+    = f.input :contact_tel
+    = f.input :contact_email
+    = f.input :notes
 
   .form-actions
     = f.submit '提交', class: 'btn btn-default'
