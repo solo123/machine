@@ -11,10 +11,6 @@ class OrdersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:orders)
   end
 =end
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
 
 =begin  
   test "should create order" do
@@ -26,15 +22,7 @@ class OrdersControllerTest < ActionController::TestCase
   end
 =end
 
-  test "should show order" do
-    get :show, id: @order
-    assert_response :success
-  end
 
-  test "should get edit" do
-    get :edit, id: @order
-    assert_response :success
-  end
 =begin
   test "should update order" do
     patch :update, id: @order, order: { order_date: @order.order_date, order_number: @order.order_number, total_amount: @order.total_amount, provider_id: @order.provider_id, status: @order.status }

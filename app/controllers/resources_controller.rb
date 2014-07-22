@@ -38,7 +38,7 @@
         end
       end
       respond_to do |format|
-       format.html { redirect_to :action => :edit }
+       format.html { redirect_to @object }
        format.json { render json: @object } # avoid this output
        format.js
       end

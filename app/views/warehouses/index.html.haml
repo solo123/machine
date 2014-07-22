@@ -1,0 +1,20 @@
+.toolbox
+  = link_to '新增仓库', new_warehouse_path
+
+.warehouses_div
+  - @collection.each do |warehouse|
+    .warehouse_row
+      [#{warehouse.name} 仓库 (#{warehouse.status})]
+      |
+      = link_to '详情', warehouse
+      |
+      = link_to '修改', edit_warehouse_path(warehouse)
+      |
+      = link_to '删除', warehouse, :method => :delete, :data => { :confirm => '你确定删除吗？' }
+    - ProductsWarehouses.where(warehouse_id: warehouse).each do |pw|
+      .product_row
+        = pw.product.name
+        = pw.store_item
+        = pw.updated_at
+
+

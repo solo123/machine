@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_id: 1
+  godown_entry_id: 1
+  godown_entry_id: 1
+  order_id: 1
+  before_items: 1
+  change_items: 1
+  now_items: 1
+  employee_id: 1
+
+two:
+  product_id: 1
+  godown_entry_id: 1
+  godown_entry_id: 1
+  order_id: 1
+  before_items: 1
+  change_items: 1
+  now_items: 1
+  employee_id: 1

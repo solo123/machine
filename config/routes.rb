@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
+  resources :warehouses
+
+  resources :product_histories
+
   devise_for :employees
   resources :godown_items
 
   resources :godown_entries do
+    collection do
+      post :import
+    end
     member do
       get :do_import
       get :check
@@ -29,10 +36,12 @@ Rails.application.routes.draw do
   resources :orders do
     collection do
       post :import
+      get :autocomplete_godown_item_terminal_code
     end
     member do
-      post :stock_in
+      post :delivery
       post :add_item
+      get :recaculate
     end
   end
 

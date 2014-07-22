@@ -2,7 +2,7 @@
 
 %table
   %tr
-    %th Company name
+    %th name
     %th Contact
     %th Tel
     %th Email
@@ -12,9 +12,9 @@
     %th
     %th
 
-  - @partners.each do |partner|
+  - @collection.each do |partner|
     %tr
-      %td= partner.company_name
+      %td= partner.partner_name
       %td= partner.contact
       %td= partner.tel
       %td= partner.email

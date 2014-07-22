@@ -19,9 +19,11 @@
     %tr
       %td= order.order_date
       %td= order.order_number
-      %td= order.provider_id
+      %td= order.partner_id
+      %td= order.contact_name
       %td= order.total_items
       %td= order.total_amount
+      %td= order.notes
       %td= order.status
       %td
         = link_to '详情', order

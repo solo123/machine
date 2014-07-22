@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require jquery.ui.autocomplete
+//= require autocomplete-rails
+//= require best_in_place
+//# require turbolinks
 //= require_tree ./shared
 //= require_tree .

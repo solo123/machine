@@ -50,4 +50,25 @@ model_2\tt_002\tsn_002\t9.99\t2
     assert gd.do_godown, 'DO godown!'
     assert_equal 1, gd.status
   end
+
+  test 'recaculate' do
+    product = products(:one)
+    gd = GodownEntry.new
+    gd.product = product
+    gd.godown_number = 'GD_001'
+    gd.save
+
+    item = gd.godown_items.build
+    item.product = product
+    item.terminal_code = 't_001'
+    item.model = 'model_001'
+    item.sn_code = 'sn_001'
+    item.save
+
+    gd.recaculate
+    assert_equal 1, gd.total_items
+    assert_equal product.godown_price, gd.total_amount
+
+
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140708015516) do
+ActiveRecord::Schema.define(version: 20140714043905) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140708015516) do
   create_table "godown_entries", force: true do |t|
     t.string   "godown_number"
     t.integer  "product_id"
+    t.integer  "warehouse_id"
     t.integer  "total_items"
     t.decimal  "total_amount",  precision: 2, scale: 12
     t.integer  "status",                                 default: 0
@@ -71,12 +72,12 @@ ActiveRecord::Schema.define(version: 20140708015516) do
   create_table "order_items", force: true do |t|
     t.integer  "order_id"
     t.integer  "product_id"
-    t.string   "t_code"
-    t.string   "model"
-    t.decimal  "price",         precision: 2, scale: 12
-    t.string   "mobile_number"
+    t.integer  "godown_item_id"
+    t.decimal  "price",          precision: 2, scale: 12
+    t.integer  "items"
+    t.decimal  "amount",         precision: 2, scale: 12
     t.string   "notes"
-    t.integer  "status",                                 default: 0
+    t.integer  "status",                                  default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -108,10 +109,33 @@ ActiveRecord::Schema.define(version: 20140708015516) do
     t.datetime "updated_at"
   end
 
+  create_table "product_histories", force: true do |t|
+    t.integer  "warehouse_id"
+    t.integer  "product_id"
+    t.integer  "godown_entry_id"
+    t.integer  "order_id"
+    t.integer  "before_items"
+    t.integer  "change_items"
+    t.integer  "now_items"
+    t.integer  "employee_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "products", force: true do |t|
     t.string   "name"
     t.string   "catalog"
+    t.decimal  "godown_price", precision: 2, scale: 12
+    t.decimal  "sale_price",   precision: 2, scale: 12
     t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products_warehouses", force: true do |t|
+    t.integer  "warehouse_id"
+    t.integer  "product_id"
+    t.integer  "store_item",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -123,6 +147,13 @@ ActiveRecord::Schema.define(version: 20140708015516) do
     t.string   "position"
     t.string   "qq"
     t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "warehouses", force: true do |t|
+    t.string   "name"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

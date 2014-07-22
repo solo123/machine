@@ -3,26 +3,27 @@ class Order < ActiveRecord::Base
   belongs_to :partner
 
   attr_accessor :foo
-  def valid_for_stock_in
-    return false unless (status == 0) && provider && order_date && order_number && (order_items.count > 0)
+
+  def valid_for_order
+    return false unless (self.status == 0) && self.partner && (self.total_items > 0) && (self.order_items.count > 0)
     true
   end
-  def stock_in
-    return false unless valid_for_stock_in
-    amount = 0
-    cnt = 0
-    self.order_items.each do |item|
-      if item.status == 0
-        item.provider = provider
-        item.status = 1
-        item.save!
-      end
-      amount += item.price
-      cnt += 1
+  def recaculate
+    return false unless self.status == 0
+    self.order_items.each { |item| item.recaculate }
+    self.total_items = self.order_items.count
+    self.total_amount = self.order_items.sum(:amount)
+    self.save
+  end
+  def delivery
+    return false unless valid_for_order
+    recaculate
+
+    self.order_items.each do |item| 
+      item.status = 1
+      item.save
     end
-    self.total_items = cnt
-    self.total_amount = amount
     self.status = 1
-    self.save!
+    self.save
   end
 end

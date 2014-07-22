@@ -1,0 +1,33 @@
+%h1 Listing product_histories
+
+%table
+  %tr
+    %th Product
+    %th Godown entry
+    %th Godown entry
+    %th Order
+    %th Before items
+    %th Change items
+    %th Now items
+    %th Employee
+    %th
+    %th
+    %th
+
+  - @product_histories.each do |product_history|
+    %tr
+      %td= product_history.product_id
+      %td= product_history.godown_entry_id
+      %td= product_history.godown_entry_id
+      %td= product_history.order_id
+      %td= product_history.before_items
+      %td= product_history.change_items
+      %td= product_history.now_items
+      %td= product_history.employee_id
+      %td= link_to 'Show', product_history
+      %td= link_to 'Edit', edit_product_history_path(product_history)
+      %td= link_to 'Destroy', product_history, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Product history', new_product_history_path

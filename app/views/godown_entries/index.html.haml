@@ -1,14 +1,15 @@
-%h1 Listing godown_entries
 
-%table
+.toolbox
+  = link_to '新增入库单', new_godown_entry_path
+
+%h1 入库单列表
+%table.table.table-bordered.table-striped.table-hover
   %tr
-    %th Godown number
-    %th Total items
-    %th Total amount
-    %th Status
-    %th Creator
-    %th
-    %th
+    %th 入库单号
+    %th 数量
+    %th 金额
+    %th 状态
+    %th 入库人
     %th
 
   - @collection.each do |godown_entry|
@@ -18,10 +19,11 @@
       %td= godown_entry.total_amount
       %td= godown_entry.status
       %td= godown_entry.creator_id
-      %td= link_to 'Show', godown_entry
-      %td= link_to 'Edit', edit_godown_entry_path(godown_entry)
-      %td= link_to 'Destroy', godown_entry, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td
+        = link_to '详情', godown_entry
+        |
+        = link_to '修改', edit_godown_entry_path(godown_entry)
+        |
+        = link_to '删除', godown_entry, :method => :delete, :data => { :confirm => '确定删除吗？' }
 
-%br
 
-= link_to 'New Godown entry', new_godown_entry_path

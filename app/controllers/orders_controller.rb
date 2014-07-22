@@ -1,20 +1,22 @@
 class OrdersController < ResourcesController
-  def index
-    load_collection
-    unless params[:cat]
-      @collection = @collection.where(status: 0)
-    end
-  end
+  autocomplete :godown_item, :terminal_code, full: :true
 
-  def destroy
+  def recaculate
     load_object
-    if @object.status == 0
-      @object.destroy
-    end
-    redirect_to :action => :index
+    @object.recaculate
+    redirect_to @object
   end
-
   def add_item
+    load_object
+    oi = @object.order_items.build
+    oi.godown_item = GodownItem.find(params[:godown_item_id])
+    oi.product = oi.godown_item.product
+    if oi.product
+      oi.price = oi.amount = oi.product.sale_price
+    end
+    oi.items = 1
+    oi.save
+    redirect_to @object
   end
 
   private

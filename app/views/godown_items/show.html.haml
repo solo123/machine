@@ -1,33 +1,31 @@
-%p#notice= notice
-
 %p
   %b Godown entry:
-  = @godown_item.godown_entry_id
+  = @object.godown_entry_id
 %p
   %b Product:
-  = @godown_item.product_id
+  = @object.product_id
 %p
   %b Terminal code:
-  = @godown_item.terminal_code
+  = @object.terminal_code
 %p
   %b Model:
-  = @godown_item.model
+  = @object.model
 %p
   %b Sn code:
-  = @godown_item.sn_code
+  = @object.sn_code
 %p
   %b Price:
-  = @godown_item.price
+  = @object.price
 %p
   %b Items:
-  = @godown_item.items
+  = @object.items
 %p
   %b Amount:
-  = @godown_item.amount
+  = @object.amount
 %p
   %b Status:
-  = @godown_item.status
+  = @object.status
 
-= link_to 'Edit', edit_godown_item_path(@godown_item)
+= link_to 'Edit', edit_godown_item_path(@object)
 \|
 = link_to 'Back', godown_items_path

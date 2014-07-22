@@ -17,9 +17,9 @@
         %li.active
           = link_to '入库', godown_entries_path
         %li
-          = link_to '库存', order_items_path + '?q[status_eq]=1'
+          = link_to '库存', warehouses_path
         %li
-          = link_to '出库单', deliveries_path
+          = link_to '出库单', orders_path
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             数据
@@ -28,7 +28,9 @@
             %li
               = link_to '产品', products_path
             %li
-              %a{:href => "#"} Another action
+              = link_to '仓库', warehouses_path
+            %li
+              = link_to '合作伙伴', partners_path
             %li
               %a{:href => "#"} Something else here
             %li.divider

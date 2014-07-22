@@ -1,7 +1,30 @@
 class OrderItem < ActiveRecord::Base
   belongs_to :order
-  belongs_to :provider
+  belongs_to :product
+  belongs_to :godown_item
 
-  scope :in_stock, -> {where(status: 1)}
-  scope :out_stock, -> {where('status > 1')}
+  def recaculate
+    if self.godown_item && self.godown_item.product
+      price = self.godown_item.product.sale_price
+
+      self.product = self.godown_item.product
+      self.price = price
+      self.items = 1 unless self.items
+      self.amount = price * self.items
+      self.save
+    end
+    true
+  end
+
+  def delivery
+    return false unless self.status == 0 && self.godown_item && self.godown_item.status == 1
+    recaculate
+    item.status = 1
+    item.save
+    item.godown_item.status = 2
+    item.godown_item.save
+
+
+  end
+
 end

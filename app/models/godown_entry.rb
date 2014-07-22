@@ -1,6 +1,7 @@
 class GodownEntry < ActiveRecord::Base
   has_many :godown_items
   belongs_to :product
+  belongs_to :warehouse
   attr_accessor :import_text
 
   def import
@@ -40,6 +41,7 @@ class GodownEntry < ActiveRecord::Base
   end
 
   def recaculate
+    self.godown_items.each {|item| item.recaculate}
     self.total_items = self.godown_items.count
     self.total_amount = self.godown_items.sum(:amount)
     self.save!
@@ -63,6 +65,7 @@ class GodownEntry < ActiveRecord::Base
     return false unless self.errors.empty?
 
     self.godown_items.each do |item|
+      ProductsWarehouses.add(self.warehouse, self.product, item.items)
       item.status = 1
       item.save!
     end

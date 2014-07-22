@@ -9,6 +9,6 @@ class OrderItemsController < ResourcesController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_item_params
-      params.require(:order_item).permit(:order_id, :t_code, :model, :sn_code, :price, :mobile_number, :status)
+      params.require(:order_item).permit(:order_id, :product_id, :godown_item_id, :price, :items, :amount, :notes, :status)
     end
 end

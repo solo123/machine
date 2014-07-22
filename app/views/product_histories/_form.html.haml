@@ -1,0 +1,15 @@
+= simple_form_for(@product_history) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :product_id
+    = f.input :godown_entry_id
+    = f.input :godown_entry_id
+    = f.input :order_id
+    = f.input :before_items
+    = f.input :change_items
+    = f.input :now_items
+    = f.input :employee_id
+
+  .form-actions
+    = f.button :submit

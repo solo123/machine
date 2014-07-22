@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  catalog: MyString
+  name: Product_01
+  catalog: cat_01
+  godown_price: 600.01
+  sale_price: 1200.01
   status: 1
 
 two:
-  name: MyString
-  catalog: MyString
+  name: Product_02
+  catalog: cat_01
+  godown_price: 600.02
+  sale_price: 1200.02
   status: 1

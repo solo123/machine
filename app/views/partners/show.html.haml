@@ -1,24 +1,22 @@
-%p#notice= notice
-
 %p
   %b Company name:
-  = @partner.company_name
+  = @object.partner_name
 %p
   %b Contact:
-  = @partner.contact
+  = @object.contact
 %p
   %b Tel:
-  = @partner.tel
+  = @object.tel
 %p
   %b Email:
-  = @partner.email
+  = @object.email
 %p
   %b Qq:
-  = @partner.qq
+  = @object.qq
 %p
   %b Status:
-  = @partner.status
+  = @object.status
 
-= link_to 'Edit', edit_partner_path(@partner)
+= link_to 'Edit', edit_partner_path(@object)
 \|
 = link_to 'Back', partners_path

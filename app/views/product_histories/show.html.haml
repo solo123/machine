@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Product:
+  = @product_history.product_id
+%p
+  %b Godown entry:
+  = @product_history.godown_entry_id
+%p
+  %b Godown entry:
+  = @product_history.godown_entry_id
+%p
+  %b Order:
+  = @product_history.order_id
+%p
+  %b Before items:
+  = @product_history.before_items
+%p
+  %b Change items:
+  = @product_history.change_items
+%p
+  %b Now items:
+  = @product_history.now_items
+%p
+  %b Employee:
+  = @product_history.employee_id
+
+= link_to 'Edit', edit_product_history_path(@product_history)
+\|
+= link_to 'Back', product_histories_path
