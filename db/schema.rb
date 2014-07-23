@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20140714043905) do
   create_table "godown_items", force: true do |t|
     t.integer  "godown_entry_id"
     t.integer  "product_id"
+    t.integer  "warehouse_id"
     t.string   "terminal_code"
     t.string   "model"
     t.string   "sn_code"
@@ -112,8 +113,8 @@ ActiveRecord::Schema.define(version: 20140714043905) do
   create_table "product_histories", force: true do |t|
     t.integer  "warehouse_id"
     t.integer  "product_id"
-    t.integer  "godown_entry_id"
-    t.integer  "order_id"
+    t.integer  "operate_sheet_id"
+    t.string   "operate_sheet_type"
     t.integer  "before_items"
     t.integer  "change_items"
     t.integer  "now_items"

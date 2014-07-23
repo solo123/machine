@@ -16,11 +16,11 @@ Partner.create!([
   {partner_name: "李四", contact: "李先生", tel: "13900200002", email: "abc4@here.com", qq: "400100001", status: 1}
 ])
 Product.create!([
-  {name: "NL730G", catalog: "大POS", godown_price: nil, sale_price: nil, status: 1},
-  {name: "NEW8110", catalog: "华智融", godown_price: nil, sale_price: nil, status: 1},
-  {name: "K370", catalog: "大POS", godown_price: nil, sale_price: nil, status: 1},
-  {name: "NL8080Y", catalog: "固定", godown_price: nil, sale_price: nil, status: 1},
-  {name: "SP60G", catalog: "大POS", godown_price: nil, sale_price: nil, status: 1},
+  {name: "NL730G", catalog: "大POS", godown_price: nil, sale_price: 1200, status: 1},
+  {name: "NEW8110", catalog: "华智融", godown_price: nil, sale_price: 1300, status: 1},
+  {name: "K370", catalog: "大POS", godown_price: nil, sale_price: 1400, status: 1},
+  {name: "NL8080Y", catalog: "固定", godown_price: nil, sale_price: 1500, status: 1},
+  {name: "SP60G", catalog: "大POS", godown_price: nil, sale_price: 1600, status: 1},
 ])
 Warehouse.create!([
   {name: "418", status: 1}

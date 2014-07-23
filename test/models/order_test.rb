@@ -1,6 +1,18 @@
 require 'test_helper'
 
 class OrderTest < ActiveSupport::TestCase
+  def order1
+    product = products(:one)
+    godown = godown_items(:one)
+    godown.product = product
+    partner = partners(:one)
+
+    order = Order.new
+    order.partner = partner
+    oi = order.order_items.build
+    oi.godown_item = godown
+    order
+  end
   test "valid for order" do
     order = Order.new
     assert_not order.valid_for_order, 'valid for empty order'
@@ -17,20 +29,21 @@ class OrderTest < ActiveSupport::TestCase
   end
 
   test 'recaculate order' do
-    godown = godown_items(:one)
     product = products(:one)
-    godown.product = product
-    godown.status = 1
-    godown.save
-
-    order = Order.new
-    oi = order.order_items.build
-    oi.godown_item = godown
+    order = order1
     assert order.save, 'save order error'
-
     assert order.recaculate, 'recaculate false'
+    #binding.pry
     assert_equal product.sale_price, order.total_amount
     assert_equal 1, order.total_items
+  end
+
+  test 'delivery order' do
+    order = order1
+    assert order.save, 'save order error'
+    assert order.recaculate, 'recaculate false'
+
+    order.delivery
   end
   
 end

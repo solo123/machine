@@ -1,21 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  warehouse_id: 1
   product_id: 1
-  godown_entry_id: 1
-  godown_entry_id: 1
-  order_id: 1
+  operate_sheet_id: 1
+  operate_sheet_type: 'GodownEntry'
   before_items: 1
   change_items: 1
   now_items: 1
   employee_id: 1
 
-two:
-  product_id: 1
-  godown_entry_id: 1
-  godown_entry_id: 1
-  order_id: 1
-  before_items: 1
-  change_items: 1
-  now_items: 1
-  employee_id: 1

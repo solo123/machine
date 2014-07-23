@@ -52,3 +52,7 @@ gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form'
 
 gem 'seed_dump'
+
+group :test do
+  gem 'pry-byebug'
+end

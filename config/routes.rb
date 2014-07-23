@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       get :autocomplete_godown_item_terminal_code
     end
     member do
-      post :delivery
+      get :delivery
       post :add_item
       get :recaculate
     end

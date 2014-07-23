@@ -1,14 +1,18 @@
 .toolbox
-  = form_tag delivery_order_path(@object) do
-    = submit_tag '出库'
-    = link_to '重算', recaculate_order_path(@object)
+  - if @object.status == 0
+    = link_to '出库', delivery_order_path(@object), class: 'btn btn-info', confirm: '确认出库吗？'
     |
-    = link_to '订单列表', orders_path
+  - else
+    已出库
+    |
+  = link_to '重算', recaculate_order_path(@object)
+  |
+  = link_to '订单列表', orders_path
+  \|
+  = link_to '修改', edit_order_path(@object)
+  - if @object.status == 0
     \|
-    = link_to '修改', edit_order_path(@object)
-    - if @object.status == 0
-      \|
-      = link_to '删除', @object, :method => :delete, :data => { :confirm => '你确认删除吗？' }
+    = link_to '删除', @object, :method => :delete, :data => { :confirm => '你确认删除吗？' }
 
   = form_tag(add_item_order_path(@object), :class => 'form-inline', :role => 'form') do
     .form-group

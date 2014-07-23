@@ -10,9 +10,11 @@ class ProductsWarehouses < ActiveRecord::Base
       0
     end
   end
-  def self.add(warehouse, product, items)
-    pw = ProductsWarehouses.where(warehouse_id: warehouse, product_id: product).first
+  def self.add(warehouse, product, items, op_object = nil)
+    pw = ProductsWarehouses.where(warehouse: warehouse, product: product).first
+    before_item = 0
     if pw
+      before_item = pw.store_item
       pw.store_item += items
     else
       pw = ProductsWarehouses.new
@@ -21,5 +23,11 @@ class ProductsWarehouses < ActiveRecord::Base
       pw.store_item = items
     end
     pw.save!
+    if op_object
+      op_object.warehouse = warehouse
+      op_object.save
+    end
+    ph = ProductHistory.new(warehouse: warehouse, product: product, operate_sheet: op_object, before_items: before_item, change_items: items, now_items: pw.store_item)
+    ph.save!
   end
 end

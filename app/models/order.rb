@@ -20,8 +20,11 @@ class Order < ActiveRecord::Base
     recaculate
 
     self.order_items.each do |item| 
-      item.status = 1
-      item.save
+      if item.status == 1
+        ProductsWarehouses.add(item.warehouse, item.product, -1, self)
+        item.status = 2
+        item.save
+      end
     end
     self.status = 1
     self.save

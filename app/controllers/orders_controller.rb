@@ -1,5 +1,5 @@
 class OrdersController < ResourcesController
-  autocomplete :godown_item, :terminal_code, full: :true
+  autocomplete :godown_item, :terminal_code, full: :true, scopes: [:in_stock]
 
   def recaculate
     load_object
@@ -16,6 +16,11 @@ class OrdersController < ResourcesController
     end
     oi.items = 1
     oi.save
+    redirect_to @object
+  end
+  def delivery
+    load_object
+    @object.delivery
     redirect_to @object
   end
 

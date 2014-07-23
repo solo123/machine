@@ -1,7 +1,9 @@
 class GodownItem < ActiveRecord::Base
   belongs_to :product
+  belongs_to :warehouse
   belongs_to :godown_entry
 
+  scope :in_stock, -> {where(status: 1)}
   def recaculate
     if self.product
       unless self.price && self.price > 0

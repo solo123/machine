@@ -47,6 +47,7 @@ class WarehouseTest < ActiveSupport::TestCase
     assert_equal 1, ProductsWarehouses.current_items(warehouse, product), '1 item godown'
 
 
+    # binding.pry
     godown = pre_entry2
     assert godown.do_godown, 'godown for entry2: ' + godown.errors.full_messages.to_sentence
     assert_equal 2, ProductsWarehouses.current_items(warehouse, product), '2 item godown'

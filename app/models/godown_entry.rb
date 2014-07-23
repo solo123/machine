@@ -65,7 +65,8 @@ class GodownEntry < ActiveRecord::Base
     return false unless self.errors.empty?
 
     self.godown_items.each do |item|
-      ProductsWarehouses.add(self.warehouse, self.product, item.items)
+      ProductsWarehouses.add(self.warehouse, self.product, item.items, self)
+      item.warehouse = self.warehouse
       item.status = 1
       item.save!
     end
