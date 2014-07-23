@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Account:
+  = @account_balance.account_id
+%p
+  %b Balance before:
+  = @account_balance.balance_before
+%p
+  %b Amount:
+  = @account_balance.amount
+%p
+  %b Balance:
+  = @account_balance.balance
+%p
+  %b Payment:
+  = @account_balance.payment_id
+
+= link_to 'Edit', edit_account_balance_path(@account_balance)
+\|
+= link_to 'Back', account_balances_path

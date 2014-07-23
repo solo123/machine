@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   partner_name: MyString
   contact: MyString
   tel: MyString
@@ -9,6 +10,7 @@ one:
   status: 1
 
 two:
+  id: 2
   partner_name: MyString
   contact: MyString
   tel: MyString

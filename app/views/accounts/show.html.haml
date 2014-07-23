@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Partner:
+  = @account.partner_id
+%p
+  %b Current balance:
+  = @account.current_balance
+
+= link_to 'Edit', edit_account_path(@account)
+\|
+= link_to 'Back', accounts_path

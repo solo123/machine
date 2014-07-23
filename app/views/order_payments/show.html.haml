@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Order:
+  = @order_payment.order_id
+%p
+  %b Balance before:
+  = @order_payment.balance_before
+%p
+  %b Pay amount:
+  = @order_payment.pay_amount
+%p
+  %b Balance:
+  = @order_payment.balance
+
+= link_to 'Edit', edit_order_payment_path(@order_payment)
+\|
+= link_to 'Back', order_payments_path

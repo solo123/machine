@@ -1,0 +1,25 @@
+%h1 Listing order_payments
+
+%table
+  %tr
+    %th Order
+    %th Balance before
+    %th Pay amount
+    %th Balance
+    %th
+    %th
+    %th
+
+  - @order_payments.each do |order_payment|
+    %tr
+      %td= order_payment.order_id
+      %td= order_payment.balance_before
+      %td= order_payment.pay_amount
+      %td= order_payment.balance
+      %td= link_to 'Show', order_payment
+      %td= link_to 'Edit', edit_order_payment_path(order_payment)
+      %td= link_to 'Destroy', order_payment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Order payment', new_order_payment_path

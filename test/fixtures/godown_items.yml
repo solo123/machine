@@ -21,3 +21,14 @@ two:
   items: 1
   amount: 9.99
   status: 1
+
+gd_100:
+  id: 100
+  product_id: 100
+  terminal_code: 100100100
+  model: Model903
+  sn_code: 9801-001
+  price: 30
+  items: 1
+  amount: 30
+  status: 1

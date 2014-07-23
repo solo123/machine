@@ -17,3 +17,15 @@ two:
   total_items: 1
   total_amount: 9.99
   status: 1
+
+order_100:
+  id: 100
+  order_date: 2014-06-23
+  order_number: Order_001
+  partner_id: 1
+  contact_name: 'Jimmy Liang'
+  total_items: 1
+  total_amount: 100.00
+  balance: 100.00
+  status: 1
+

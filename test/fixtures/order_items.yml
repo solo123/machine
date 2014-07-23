@@ -19,3 +19,13 @@ two:
   amount: 9.98
   notes: 'tow item'
   status: 1
+
+order_100_1:
+  order_id: 100
+  product_id: 100
+  godown_item_id: 100
+  price: 100
+  items: 1
+  amount: 100
+  notes: 'order 100 for test'
+  status: 1

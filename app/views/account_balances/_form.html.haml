@@ -1,0 +1,12 @@
+= simple_form_for(@account_balance) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :account_id
+    = f.input :balance_before
+    = f.input :amount
+    = f.input :balance
+    = f.input :payment_id
+
+  .form-actions
+    = f.button :submit

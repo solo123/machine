@@ -8,7 +8,8 @@ class CreateOrders < ActiveRecord::Migration
       t.string :contact_tel
       t.string :contact_email
       t.integer :total_items, default: 0
-      t.decimal :total_amount, precision: 2, scale: 12 
+      t.decimal :total_amount, precision: 2, scale: 12, default: 0
+      t.decimal :balance, precision: 2, scale: 12, default: 0
       t.string :notes
       t.integer :order_type, default: 0
       t.integer :status, default: 0

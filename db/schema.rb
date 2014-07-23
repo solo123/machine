@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714043905) do
+ActiveRecord::Schema.define(version: 20140723064925) do
+
+  create_table "account_balances", force: true do |t|
+    t.integer  "account_id"
+    t.decimal  "balance_before",   precision: 2, scale: 12
+    t.decimal  "amount",           precision: 2, scale: 12
+    t.decimal  "balance",          precision: 2, scale: 12
+    t.integer  "order_payment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "accounts", force: true do |t|
+    t.integer  "partner_id"
+    t.decimal  "current_balance", precision: 2, scale: 12, default: 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -83,6 +100,15 @@ ActiveRecord::Schema.define(version: 20140714043905) do
     t.datetime "updated_at"
   end
 
+  create_table "order_payments", force: true do |t|
+    t.integer  "order_id"
+    t.decimal  "balance_before", precision: 2, scale: 12
+    t.decimal  "pay_amount",     precision: 2, scale: 12
+    t.decimal  "balance",        precision: 2, scale: 12, default: 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "orders", force: true do |t|
     t.date     "order_date"
     t.string   "order_number"
@@ -91,7 +117,8 @@ ActiveRecord::Schema.define(version: 20140714043905) do
     t.string   "contact_tel"
     t.string   "contact_email"
     t.integer  "total_items",                            default: 0
-    t.decimal  "total_amount",  precision: 2, scale: 12
+    t.decimal  "total_amount",  precision: 2, scale: 12, default: 0.0
+    t.decimal  "balance",       precision: 2, scale: 12, default: 0.0
     t.string   "notes"
     t.integer  "order_type",                             default: 0
     t.integer  "status",                                 default: 0

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :account_balances
+
+  resources :accounts
+
+  resources :order_payments
+
   resources :warehouses
 
   resources :product_histories

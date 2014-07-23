@@ -13,3 +13,11 @@ two:
   godown_price: 600.02
   sale_price: 1200.02
   status: 1
+
+p100:
+  id: 100
+  name: Product_100
+  catalog: cat_100
+  godown_price: 30
+  sale_price: 100
+  status: 1
