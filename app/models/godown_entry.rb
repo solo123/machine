@@ -2,6 +2,7 @@ class GodownEntry < ActiveRecord::Base
   has_many :godown_items
   belongs_to :product
   belongs_to :warehouse
+  belongs_to :creator, class_name: 'Employee'
   attr_accessor :import_text
 
   def import

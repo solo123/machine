@@ -1,0 +1,23 @@
+.toolbox
+  = toolbox_button '新增员工', new_employee_path
+
+%table.table.table-bordered.table-striped.table-hover
+  %tr
+    %th Email
+    %th 名字
+    %th 权限
+    %th
+
+  - @collection.each do |emp|
+    %tr
+      %td= emp.email
+      %td= emp.display_name
+      %td= emp.roles
+      %td
+        = link_to '详情', emp
+        |
+        = link_to '修改', edit_employee_path(emp)
+        |
+        = link_to '删除', emp, :method => :delete, :data => { :confirm => '你确认删除吗？' }
+
+

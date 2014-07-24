@@ -1,0 +1,12 @@
+.toolbox
+  = toolbox_button '修改', edit_employee_path(@object)
+  = toolbox_button '列表', employees_path
+%p
+  Email: 
+  = @object.email
+%p
+  姓名：
+  = @object.display_name
+%p
+  权限：
+  = @object.roles

@@ -36,21 +36,15 @@
             %li.divider
             %li
               %a{:href => "#"} Separated link
-            %li.divider
-            %li
-              %a{:href => "#"} One more separated link
-      %form.navbar-form.navbar-left{:role => "search"}
-        .form-group
-          %input.form-control{:placeholder => "Search", :type => "text"}
-        %button.btn.btn-default{:type => "submit"} Submit
+            - if current_employee && current_employee.admin?
+              %li.divider
+              %li= link_to '员工', employees_path
+
       %ul.nav.navbar-nav.navbar-right
-        - if false #current_user
-          %li 
-            %strong.welcome 
-              欢迎 #{current_user.username}! 
-              - if current_user.admin?
-                [Admin]
-          %li= link_to '退出登录', destroy_user_session_path, method: 'delete'
+        - if current_employee
+          %li
+            = link_to  "欢迎 #{current_employee.display_name}! #{current_employee.admin? ? '[admin]' : ''}", employee_path(current_employee)
+          %li= link_to '退出登录', destroy_employee_session_path, method: 'delete'
         - else
           %li 
             %span.pleaselogin 请登录！

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'home#index'
+  resources :home
   resources :account_balances
 
   resources :accounts
@@ -34,10 +36,10 @@ Rails.application.routes.draw do
 
   resources :companies
 
-  root 'orders#index'
   resources :order_items
 
   resources :providers
+  resources :employees
 
   resources :orders do
     collection do

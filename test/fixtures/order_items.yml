@@ -29,3 +29,12 @@ order_100_1:
   amount: 100
   notes: 'order 100 for test'
   status: 1
+order_200_1:
+  order_id: 200
+  product_id: 1
+  godown_item_id: 1
+  price: 200
+  items: 1
+  amount: 200
+  notes: 'order 200 for test'
+  status: 0

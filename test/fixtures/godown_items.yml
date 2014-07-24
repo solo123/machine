@@ -32,3 +32,13 @@ gd_100:
   items: 1
   amount: 30
   status: 1
+gd_200:
+  id: 200
+  product_id: 1
+  terminal_code: 200100100
+  model: Model903
+  sn_code: 9801-002
+  price: 200
+  items: 1
+  amount: 200
+  status: 0

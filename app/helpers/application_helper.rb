@@ -34,4 +34,20 @@ module ApplicationHelper
 			''
 		end
 	end
+
+  def toolbox_button(title, url, options = {})
+    options[:title] = title
+    options[:class] = 'btn btn-info btn-sm'
+    link_to(raw('<i class="icon-pencil"></i> ' + title), url, options)
+  end
+  def status_text(obj)
+    classname = obj.class.name
+    if classname == 'GodownEntry'
+      %w"新单 已入库 xx xx xx xx"[obj.status]
+    elsif classname == 'GodownItem'
+      %w"新单 已入库 xx xx xx xx"[obj.status]
+    else
+      "(#{classname}: #{obj.status})"
+    end
+  end
 end

@@ -2,11 +2,11 @@
 
 one:
   id: 1
-  partner_name: MyString
-  contact: MyString
-  tel: MyString
-  email: MyString
-  qq: MyString
+  partner_name: Test User
+  contact: Jimmy Liang
+  tel: 13900000001
+  email: email@here.com
+  qq: 6666666
   status: 1
 
 two:

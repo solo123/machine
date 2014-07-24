@@ -8,6 +8,7 @@ class CreateGodownEntries < ActiveRecord::Migration
       t.decimal :total_amount, precision: 2, scale: 12
       t.integer :status, default: 0
       t.integer :creator_id
+      t.string :notes
 
       t.timestamps
     end

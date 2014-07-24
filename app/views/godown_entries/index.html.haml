@@ -1,15 +1,15 @@
 
 .toolbox
-  = link_to '新增入库单', new_godown_entry_path
+  = toolbox_button '新增入库单', new_godown_entry_path
 
-%h1 入库单列表
 %table.table.table-bordered.table-striped.table-hover
   %tr
     %th 入库单号
     %th 数量
     %th 金额
     %th 状态
-    %th 入库人
+    %th 操作人
+    %th 备注
     %th
 
   - @collection.each do |godown_entry|
@@ -17,8 +17,9 @@
       %td= godown_entry.godown_number
       %td= godown_entry.total_items
       %td= godown_entry.total_amount
-      %td= godown_entry.status
-      %td= godown_entry.creator_id
+      %td= status_text(godown_entry)
+      %td= godown_entry.creator
+      %td= godown_entry.notes
       %td
         = link_to '详情', godown_entry
         |

@@ -13,19 +13,20 @@
 
 ActiveRecord::Schema.define(version: 20140723064925) do
 
-  create_table "account_balances", force: true do |t|
+  create_table "account_histories", force: true do |t|
     t.integer  "account_id"
     t.decimal  "balance_before",   precision: 2, scale: 12
     t.decimal  "amount",           precision: 2, scale: 12
     t.decimal  "balance",          precision: 2, scale: 12
     t.integer  "order_payment_id"
+    t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "accounts", force: true do |t|
     t.integer  "partner_id"
-    t.decimal  "current_balance", precision: 2, scale: 12, default: 0.0
+    t.decimal  "balance",    precision: 2, scale: 12, default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,6 +46,8 @@ ActiveRecord::Schema.define(version: 20140723064925) do
   create_table "employees", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
+    t.string   "display_name",           default: ""
+    t.string   "roles",                  default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -68,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140723064925) do
     t.decimal  "total_amount",  precision: 2, scale: 12
     t.integer  "status",                                 default: 0
     t.integer  "creator_id"
+    t.string   "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,7 +1,7 @@
-%h1 Editing godown_entry
+.toolbox
+  = link_to '列表', godown_entries_path
+  |
+  = link_to '返回入库单', @object
 
 = render 'form'
-
-= link_to 'Show', @object
-\|
-= link_to 'Back', godown_entries_path
+= render 'items'
