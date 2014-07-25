@@ -1,16 +1,9 @@
 class GodownEntriesController < ResourcesController
-  def import
-    params.permit!
-    @object = GodownEntry.new(params[:godown_entry])
-    if @object.changed_for_autosave?
-      @object.import
-    end
-    redirect_to @object
-  end
   def check
     load_object
     unless @object.valid_for_godown
-      flash[:error] = @object.errors.messages.to_
+      flash[:error] = @object.errors.full_messages.to_sentence
+
     end
     redirect_to @object
   end
@@ -19,6 +12,16 @@ class GodownEntriesController < ResourcesController
     load_object
     @object.do_godown
     redirect_to @object
+  end
+
+  def clear_items
+    load_object
+    if @object.status == 0
+      @object.godown_items.where(status: 0).destroy_all
+      @object.recaculate
+    end
+  
+    redirect_to action: :edit
   end
 
   private

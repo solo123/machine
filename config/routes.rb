@@ -15,12 +15,10 @@ Rails.application.routes.draw do
   resources :godown_items
 
   resources :godown_entries do
-    collection do
-      post :import
-    end
     member do
       get :do_import
       get :check
+      get :clear_items
     end
   end
 

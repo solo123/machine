@@ -13,8 +13,10 @@ model_2\tt_002\tsn_002\t9.99\t2
 >)    
 
     assert_not godown.import, 'no product'
+
     godown.product_id = 1
-    assert godown.import
+    godown.save
+    assert_equal nil, godown.import_text
     assert_equal 123.45 + 9.99 * 2, godown.total_amount, 'total_amount'
     assert_equal 2, godown.total_items, 'total_items'
   end

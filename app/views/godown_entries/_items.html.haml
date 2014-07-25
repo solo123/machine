@@ -1,8 +1,8 @@
 %table.table.table-bordered.table-striped.table-hover
   %thead
     %tr
-      %th 终端号
       %th 型号
+      %th 终端号
       %th 机身编号
       %th 价格
       %th 数量
@@ -12,8 +12,8 @@
   %tbody
     - @object.godown_items.each do |godown_item|
       %tr
-        %td= godown_item.terminal_code
         %td= godown_item.model
+        %td= godown_item.terminal_code
         %td= godown_item.sn_code
         %td= godown_item.price
         %td= godown_item.items

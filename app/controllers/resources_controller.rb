@@ -29,13 +29,10 @@
       load_object
 			params.permit!
       @object.attributes = params[object_name.singularize.parameterize('_')]
-      if @object.changed_for_autosave?
-        #@changes = @object.all_changes
-        if @object.save
-        else
-          flash[:error] = @object.errors.full_messages.to_sentence
-          @no_log = 1
-        end
+      if @object.save
+      else
+        flash[:error] = @object.errors.full_messages.to_sentence
+        @no_log = 1
       end
       respond_to do |format|
        format.html { redirect_to @object }

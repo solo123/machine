@@ -5,12 +5,11 @@ class GodownEntry < ActiveRecord::Base
   belongs_to :creator, class_name: 'Employee'
   attr_accessor :import_text
 
+  after_save :import
+
   def import
     # 型号，终端号，序列号，价格，数量
-    unless self.import_text
-      self.errors[:base] << 'Empty import text'
-      return false
-    end
+    return true unless self.import_text
     unless self.product_id
       self.errors[:base] << 'No product_id'
       return false
@@ -37,6 +36,7 @@ class GodownEntry < ActiveRecord::Base
         #puts "#{cs[0]},#{cs[1]},#{cs[2]},#{cs[3]},#{cs[4]}"
       end
     end
+    self.import_text = nil
     self.save!
     recaculate
   end

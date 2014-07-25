@@ -1,6 +1,9 @@
+.toolbox
+  = toolbox_button '新出库', new_order_path
+
 %ul.nav.nav-tabs
   %li{class: "#{params[:cat] ? '' : 'active'}"}
-    = link_to "新入库", orders_path
+    = link_to "新出库单", orders_path
   %li{class: "#{params[:cat] ? 'active' : ''}"}
     = link_to '全部', orders_path + "?cat=1"
         
@@ -30,6 +33,3 @@
         |
         = link_to '修改', edit_order_path(order)
 
-%br
-
-= link_to '新入库', new_order_path

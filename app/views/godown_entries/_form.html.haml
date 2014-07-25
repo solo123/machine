@@ -1,10 +1,10 @@
-= simple_form_for(@object, url: import_godown_entries_path) do |f|
+= simple_form_for(@object) do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :godown_number
     = f.association :product
-    | 型号 | 终端号 | 机身序号 | 价格 | 数量 |
+    Excel文件包含以下几列数据：型号 | 终端号 | 机身序号 | 价格 | 数量 |
     = f.input :import_text, as: :text
 
   .form-actions
