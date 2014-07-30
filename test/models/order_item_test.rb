@@ -16,4 +16,16 @@ class OrderItemTest < ActiveSupport::TestCase
     assert_equal price, oi.price
     assert_equal price, oi.amount
   end
+
+  test 'recaculate only with t_code' do
+    godown_item = godown_items(:gd_100)
+    item = OrderItem.new
+    item.t_code = godown_item.terminal_code
+    item.save
+
+    item.recaculate
+    assert_equal 100, item.godown_item_id
+    assert_equal 100, item.product_id
+    assert_equal 100, item.price
+  end
 end

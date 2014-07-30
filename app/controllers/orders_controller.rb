@@ -24,6 +24,11 @@ class OrdersController < ResourcesController
     redirect_to @object
   end
 
+  def import
+    # 订单号，日期，串码，合作伙伴，备注
+    Order.import(params[:import_text])
+    redirect_to orders_path
+  end
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params

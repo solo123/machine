@@ -38,6 +38,7 @@
     %tr
       %th 机型
       %th 终端编号
+      %th 终端编号
       %th 型号
       %th 单价
       %th 数量
@@ -50,6 +51,7 @@
       %tr
         %td= "#{item.product.catalog} #{item.product.name}" if item.product
         %td= item.godown_item.terminal_code if item.godown_item
+        %td= item.t_code
         %td= item.godown_item.model if item.godown_item
         %td= best_in_place item, :price, type: :input
         %td= item.items

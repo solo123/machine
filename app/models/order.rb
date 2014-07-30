@@ -26,13 +26,13 @@ class Order < ActiveRecord::Base
     recaculate
 
     self.order_items.each do |item| 
-      if item.status == 1
-        ProductsWarehouses.add(item.warehouse, item.product, -1, self)
-        item.status = 2
+      if item.status == 0
+        ProductsWarehouses.add(item.godown_item.warehouse, item.product, -1, self)
+        item.status = 1
         item.save
       end
     end
-    self.status = 1
+    self.status = 1 if self.order_items.where('status < 1').count == 0
     p = self.partner
     if p
       p.account = p.build_account unless p.account
@@ -58,15 +58,13 @@ class Order < ActiveRecord::Base
     import_text.split(/\n/).each do |line|
       cs = line.split(/[\t]/)
       if cs.length > 3
-        order = Order.find_by_order_number cs[0]
-        order = Order.new unless order
+        order_number = cs[0]
+        order_number = DateTime.now.to_id unless cs[0]
+
+        order = Order.find_or_create_by(order_number: order_number)
         order.order_date = cs[1].to_date
-        if cs[3] && !cs[3].strip.empty?
-          order.partner = Partner.find_by_partner_name cs[3]
-          unless order.partner
-            p = Partner.new(partner_name: cs[3])
-            order.partner = p
-          end
+        if cs[3] && !cs[3].blank?
+          order.partner = Partner.find_or_create_by(partner_name: cs[3])
         end
         item = order.order_items.build
         item.t_code = cs[2]

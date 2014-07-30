@@ -1,5 +1,6 @@
 .toolbox
   = toolbox_button '新出库', new_order_path
+  = link_to '批量导入出库单', prepare_import_orders_path
 
 %ul.nav.nav-tabs
   %li{class: "#{params[:cat] ? '' : 'active'}"}

@@ -23,7 +23,7 @@ class ProductsWarehouses < ActiveRecord::Base
       pw.store_item = items
     end
     pw.save!
-    if op_object
+    if op_object && op_object.has_attribute?('warehouse')
       op_object.warehouse = warehouse
       op_object.save
     end

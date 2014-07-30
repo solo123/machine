@@ -46,4 +46,14 @@ class OrderTest < ActiveSupport::TestCase
     order.delivery
   end
 
+  test 'import' do
+    import_text = %(
+ord001\t20140601\tt0001\t张三\tabc
+\t20140602\tt0002\t张三\t
+    )
+    assert Order.import(import_text)
+    ord1 = Order.find_by_order_number('ord001')
+    assert_equal 't0001', ord1.order_items.first.t_code
+    
+  end
 end

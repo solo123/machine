@@ -4,6 +4,11 @@ class OrderItem < ActiveRecord::Base
   belongs_to :godown_item
 
   def recaculate
+    unless self.godown_item
+      if self.t_code
+        self.godown_item = GodownItem.find_by_terminal_code(self.t_code)
+      end
+    end
     if self.godown_item && self.godown_item.product
       price = self.godown_item.product.sale_price
 

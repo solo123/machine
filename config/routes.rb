@@ -47,6 +47,7 @@ Rails.application.routes.draw do
 
   resources :orders do
     collection do
+      get :prepare_import
       post :import
       get :autocomplete_godown_item_terminal_code
     end
