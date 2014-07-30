@@ -12,7 +12,7 @@
   %tbody
     - @object.godown_items.each do |godown_item|
       %tr
-        %td= godown_item.model
+        %td= godown_item.product.name if godown_item.product
         %td= godown_item.terminal_code
         %td= godown_item.sn_code
         %td= godown_item.price

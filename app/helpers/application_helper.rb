@@ -1,14 +1,15 @@
 module ApplicationHelper
-  ALERT_TYPES = [:error, :info, :success, :warning]
+  ALERT_TYPES = [:danger, :info, :success, :warning]
   def bootstrap_flash
     flash_messages = []
     flash.each do |type, message|
-      #puts type, message, type == 'alert'
+      #puts "[FLASH] #{type}, #{message}"
       next if message.blank?
 
       type = :success if type == 'notice'
-      type = :warning   if type == 'alert'
-      next unless ALERT_TYPES.include?(type)
+      type = :warning if type == 'alert'
+      type = :danger if type == 'error'
+      #next unless ALERT_TYPES.include?(type)
 
       Array(message).each do |msg|
         text = content_tag(:div,
@@ -49,5 +50,8 @@ module ApplicationHelper
     else
       "(#{classname}: #{obj.status})"
     end
+  end
+  def object_url(object, options = {})
+    send "#{object.class.name.underscore.split('/').last}_path", object, options
   end
 end

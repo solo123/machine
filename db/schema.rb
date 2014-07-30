@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723064925) do
+ActiveRecord::Schema.define(version: 20140730024919) do
 
   create_table "account_histories", force: true do |t|
     t.integer  "account_id"
@@ -91,10 +91,22 @@ ActiveRecord::Schema.define(version: 20140723064925) do
     t.datetime "updated_at"
   end
 
+  create_table "order_imports", force: true do |t|
+    t.string   "product_name"
+    t.integer  "product_id"
+    t.string   "terminal_code"
+    t.string   "sn_code"
+    t.decimal  "price",         precision: 2, scale: 12
+    t.integer  "status",                                 default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "order_items", force: true do |t|
     t.integer  "order_id"
     t.integer  "product_id"
     t.integer  "godown_item_id"
+    t.string   "t_code"
     t.decimal  "price",          precision: 2, scale: 12
     t.integer  "items"
     t.decimal  "amount",         precision: 2, scale: 12

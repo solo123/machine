@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :godown_entries do
     member do
       get :do_import
+      get :import
       get :check
       get :clear_items
     end
@@ -35,9 +36,14 @@ Rails.application.routes.draw do
   resources :companies
 
   resources :order_items
+  resources :product_warehouses
 
   resources :providers
-  resources :employees
+  resources :employees do
+    collection do
+      post :add
+    end
+  end
 
   resources :orders do
     collection do

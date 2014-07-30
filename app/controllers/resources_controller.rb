@@ -7,63 +7,63 @@
   def search
     render 'search', :layout => nil
   end
-    def index
-      return @collection if @collection.present?
-      load_collection
-    end
-    def show
-       load_object
-        respond_to do |format|
-          format.html
-          format.js
-          format.json { render json: @object }
-        end
-    end
-    def edit
-      load_object
-    end
-    def new
-      @object = object_name.classify.constantize.new
-    end
-    def update
-      load_object
-			params.permit!
-      @object.attributes = params[object_name.singularize.parameterize('_')]
-      if @object.save
-      else
-        flash[:error] = @object.errors.full_messages.to_sentence
-        @no_log = 1
-      end
+  def index
+    return @collection if @collection.present?
+    load_collection
+  end
+  def show
+     load_object
       respond_to do |format|
-       format.html { redirect_to @object }
-       format.json { render json: @object } # avoid this output
-       format.js
+        format.html
+        format.js
+        format.json { render json: @object }
       end
+  end
+  def edit
+    load_object
+  end
+  def new
+    @object = object_name.classify.constantize.new
+  end
+  def update
+    load_object
+    params.permit!
+    @object.attributes = params[object_name.singularize.parameterize('_')]
+    if @object.save
+    else
+      flash[:error] = @object.errors.full_messages.to_sentence
+      @no_log = 1
     end
-    def create
-			params.permit!
-      @object = object_name.classify.constantize.new(params[object_name.singularize.parameterize('_')])
-      @object.employee = current_employee if @object.attributes.has_key? 'employee_id'
-      @object.creator = current_employee if @object.attributes.has_key? 'creator_id'
-      if @object.save
-        redirect_to @object
-        return
-      else
-        flash[:error] = @object.errors.full_messages.to_sentence
-        @no_log = 1
-      end
-      redirect_to :action => :new
+    respond_to do |format|
+     format.html { render :edit }
+     format.json { render json: @object } # avoid this output
+     format.js
     end
-    def destroy
-      load_object
-      if @object.status && @object.status > 0
-        @object.status = 0
-      else
-        @object.status = 7
-      end
-      @object.save
-      redirect_to :action => :index
+  end
+  def create
+    params.permit!
+    @object = object_name.classify.constantize.new(params[object_name.singularize.parameterize('_')])
+    @object.employee = current_employee if @object.attributes.has_key? 'employee_id'
+    @object.creator = current_employee if @object.attributes.has_key? 'creator_id'
+    if @object.save
+      render :edit
+      return
+    else
+      flash[:error] = @object.errors.full_messages.to_sentence
+      @no_log = 1
     end
+    render :new
+  end
+  def destroy
+    load_object
+    if @object.status && @object.status > 0
+      @object.status = 0
+    else
+      @object.status = 7
+    end
+    @object.save
+    redirect_to :action => :index
+  end
     
     protected
       def load_collection

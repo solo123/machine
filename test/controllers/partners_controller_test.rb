@@ -22,7 +22,6 @@ class PartnersControllerTest < ActionController::TestCase
       post :create, partner: { partner_name: @partner.partner_name, contact: @partner.contact, email: @partner.email, qq: @partner.qq, status: @partner.status, tel: @partner.tel }
     end
 
-    assert_redirected_to partner_path(assigns(:object))
   end
 
   test "should show partner" do
@@ -37,7 +36,6 @@ class PartnersControllerTest < ActionController::TestCase
 
   test "should update partner" do
     patch :update, id: @partner, partner: { partner_name: @partner.partner_name, contact: @partner.contact, email: @partner.email, qq: @partner.qq, status: @partner.status, tel: @partner.tel }
-    assert_redirected_to partner_path(assigns(:object))
   end
 
 end

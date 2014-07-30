@@ -53,4 +53,27 @@ class Order < ActiveRecord::Base
     self.status = 3 if self.balance == 0
     self.save
   end
+  def self.import(import_text)
+    # 订单号，日期，串码，合作伙伴，备注
+    import_text.split(/\n/).each do |line|
+      cs = line.split(/[\t]/)
+      if cs.length > 3
+        order = Order.find_by_order_number cs[0]
+        order = Order.new unless order
+        order.order_date = cs[1].to_date
+        if cs[3] && !cs[3].strip.empty?
+          order.partner = Partner.find_by_partner_name cs[3]
+          unless order.partner
+            p = Partner.new(partner_name: cs[3])
+            order.partner = p
+          end
+        end
+        item = order.order_items.build
+        item.t_code = cs[2]
+        item.notes = cs[4] if cs.length > 4
+        order.save
+      end
+    end
+    true
+  end
 end

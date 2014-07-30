@@ -1,0 +1,27 @@
+.toolbox
+  = link_to '全部库存', warehouses_path
+%p
+  仓库：
+  = @object.warehouse.name if @object.warehouse
+  产品：
+  = @object.product.name if @object.product
+  库存数量：
+  = @object.store_item
+  
+%table.table.table-bordered.table-striped.table-hover
+  %thead
+    %tr
+      %th 相关货单
+      %th 之前数量
+      %th 数量
+      %th 当前数量
+      %th 日期
+  %tbody
+    - ProductHistory.where(product: @object.product).where(warehouse: @object.warehouse).each do |item|
+      %tr
+        %td= link_to "#{item.operate_sheet_type}(#{item.operate_sheet_id})", object_url(item.operate_sheet)
+        %td= item.before_items
+        %td= item.change_items
+        %td= item.now_items
+        %td= item.updated_at
+

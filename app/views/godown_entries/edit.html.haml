@@ -2,7 +2,9 @@
   = link_to '列表', godown_entries_path
   |
   = link_to '返回入库单', @object
+  |
+  = link_to '确认导入', import_godown_entry_path(@object)
 
 = render 'form'
+= toolbox_button '清空待导入输入', clear_items_godown_entry_path(@object), data: {confirm: '确认清空待导入数据吗？'}
 = render 'items'
-= toolbox_button '清空子项目', clear_items_godown_entry_path(@object), data: {confirm: '确认清空子项目吗？'}

@@ -1,0 +1,12 @@
+= simple_form_for(@object, url: add_employees_path) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :email
+    = f.input :display_name
+    = f.input :password
+    = f.input :password_confirmation
+
+  .form-actions
+    = f.button :submit
+

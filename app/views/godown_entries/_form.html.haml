@@ -3,9 +3,37 @@
 
   .form-inputs
     = f.input :godown_number
-    = f.association :product
-    Excel文件包含以下几列数据：型号 | 终端号 | 机身序号 | 价格 | 数量 |
+    = f.association :warehouse
+    导入Excel文件包含以下几列数据：产品名称 | 终端号 | 价格 |
     = f.input :import_text, as: :text
 
   .form-actions
     = f.button :submit
+
+- t_items = 0
+- t_amount = 0.0
+
+%p 待导入数据：
+%table.table.table-bordered.table-striped.table-hover
+  %thead
+    %tr
+      %th 产品名称
+      %th 已有产品
+      %th 终端编号
+      %th 价格
+  %tbody
+    - OrderImport.all.each do |imp|
+      - t_items += 1
+      - t_amount += imp.price
+      %tr
+        %td= imp.product_name
+        %td= "#{imp.product.name}(#{imp.product.id})" if imp.product
+        %td= imp.terminal_code
+        %td= imp.price
+  %tfoot
+    %tr
+      %td
+      %td 合计
+      %td= t_items
+      %td= t_amount
+

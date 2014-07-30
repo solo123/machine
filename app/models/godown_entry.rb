@@ -8,37 +8,27 @@ class GodownEntry < ActiveRecord::Base
   after_save :import
 
   def import
-    # 型号，终端号，序列号，价格，数量
+    # 产品名称，终端号，价格, 机身编号
     return true unless self.import_text
-    unless self.product_id
-      self.errors[:base] << 'No product_id'
-      return false
-    end
-
-    lines = import_text.split(/\n/)
-    imp_lines = 0
-    amount = 0.0
-    lines.each do |line|
-      cs = line.split(/[\t]/)
-      if cs.length >= 5
-        item = self.godown_items.build
-        item.product_id = self.product_id
-        item.model = cs[0]
-        item.terminal_code = cs[1]
-        item.sn_code = cs[2]
-        item.price = cs[3]
-        item.items = cs[4] if cs[4]
-        item.items = 1 if !item.items || (item.items < 1)
-        item.amount = item.price * item.items
-        item.status = 0
-        imp_lines += 1
-        amount += item.amount
-        #puts "#{cs[0]},#{cs[1]},#{cs[2]},#{cs[3]},#{cs[4]}"
-      end
-    end
+    OrderImport.import(self.import_text)
     self.import_text = nil
-    self.save!
-    recaculate
+    true
+  end
+  def do_import
+    OrderImport.all.each do |oi|
+      item = self.godown_items.build
+      item.terminal_code = oi.terminal_code
+      item.sn_code = oi.sn_code
+      item.price = oi.price
+      if oi.product
+        item.product = oi.product
+      else
+        p = Product.find_or_create_by(name: oi.product_name)
+        item.product = p
+      end
+      item.save
+      oi.destroy
+    end
   end
 
   def recaculate
@@ -50,7 +40,10 @@ class GodownEntry < ActiveRecord::Base
 
   def valid_for_godown
     self.errors.clear
-    if !GodownEntry.where(godown_number: self.godown_number).where('status > 0').empty?
+    if self.status > 0
+      self.errors[:base] << "此单已经入库，不能再重复入库。"
+      false
+    elsif !GodownEntry.where(godown_number: self.godown_number).where('status > 0').empty?
       self.errors[:base] << "Duplicate godown number #{self.godown_number}"
       false
     elsif self.total_items == nil || self.total_items < 1 || self.total_amount == nil || self.total_amount == 0
@@ -66,7 +59,7 @@ class GodownEntry < ActiveRecord::Base
     return false unless self.errors.empty?
 
     self.godown_items.each do |item|
-      ProductsWarehouses.add(self.warehouse, self.product, item.items, self)
+      ProductsWarehouses.add(self.warehouse, item.product, item.items, self)
       item.warehouse = self.warehouse
       item.status = 1
       item.save!

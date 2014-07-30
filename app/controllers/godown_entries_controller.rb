@@ -1,6 +1,7 @@
 class GodownEntriesController < ResourcesController
   def check
     load_object
+    @object.recaculate
     unless @object.valid_for_godown
       flash[:error] = @object.errors.full_messages.to_sentence
 
@@ -8,19 +9,26 @@ class GodownEntriesController < ResourcesController
     redirect_to @object
   end
 
+  def import
+    load_object
+    unless @object.do_import
+      flash[:error] = @object.errors.full_messages.to_sentence
+    end
+    render :show
+  end
+
   def do_import
     load_object
-    @object.do_godown
+    @object.recaculate
+    unless @object.do_godown
+      flash[:error] = @object.errors.full_messages.to_sentence
+    end
     redirect_to @object
   end
 
   def clear_items
     load_object
-    if @object.status == 0
-      @object.godown_items.where(status: 0).destroy_all
-      @object.recaculate
-    end
-  
+    OrderImport.destroy_all
     redirect_to action: :edit
   end
 

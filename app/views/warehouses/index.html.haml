@@ -17,8 +17,10 @@
         %table.table.table-bordered.table-striped.table-hover
           - ProductsWarehouses.where(warehouse_id: warehouse).each do |pw|
             %tr
-              %td= pw.product.name
+              %td= pw.product.name if pw.product
               %td= pw.store_item
+              %td= pw.product.sale_price if pw.product
               %td= pw.updated_at
+              %td= link_to '进出库流水', product_warehouse_path(pw)
 
 

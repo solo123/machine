@@ -28,11 +28,6 @@ class GodownEntriesControllerTest < ActionController::TestCase
   end
 
   test "should update godown_entry" do
-    assert_difference('@godown_entry.godown_items.count', 2) do
-      patch :update, id: @godown_entry, godown_entry: { creator_id: @godown_entry.creator_id, godown_number: @godown_entry.godown_number, status: @godown_entry.status, total_amount: @godown_entry.total_amount, total_items: @godown_entry.total_items, import_text: "MOD_1\tTerminal_1\tSN_1\t100.01\t1\nMOD_2\tT_2\tS_2\t100.02\t0\n" }
-    end
-
-    assert_redirected_to godown_entry_path(assigns(:object))
   end
 
 end

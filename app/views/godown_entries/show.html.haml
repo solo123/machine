@@ -1,9 +1,8 @@
 %p
   %b 单号:
   = @object.godown_number
-
-  %b 产品：
-  = @object.product.name
+  %b 仓库：
+  = @object.warehouse.name if @object.warehouse
 
 .toolbox
   = link_to '列表', godown_entries_path

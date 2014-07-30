@@ -2,13 +2,14 @@ require 'test_helper'
 
 class WarehousesControllerTest < ActionController::TestCase
   setup do
-    @warehouse = warehouses(:one)
+    @warehouse = warehouses(:two)
+    sign_in employees(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:warehouses)
+    assert_not_nil assigns(:collection)
   end
 
   test "should get new" do
@@ -18,10 +19,9 @@ class WarehousesControllerTest < ActionController::TestCase
 
   test "should create warehouse" do
     assert_difference('Warehouse.count') do
-      post :create, warehouse: { name: @warehouse.name, status: @warehouse.status }
+      post :create, warehouse: { name: 'New warehouse', status: "1" }
     end
 
-    assert_redirected_to warehouse_path(assigns(:warehouse))
   end
 
   test "should show warehouse" do
@@ -36,14 +36,6 @@ class WarehousesControllerTest < ActionController::TestCase
 
   test "should update warehouse" do
     patch :update, id: @warehouse, warehouse: { name: @warehouse.name, status: @warehouse.status }
-    assert_redirected_to warehouse_path(assigns(:warehouse))
   end
 
-  test "should destroy warehouse" do
-    assert_difference('Warehouse.count', -1) do
-      delete :destroy, id: @warehouse
-    end
-
-    assert_redirected_to warehouses_path
-  end
 end

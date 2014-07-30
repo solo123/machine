@@ -45,5 +45,5 @@ class OrderTest < ActiveSupport::TestCase
 
     order.delivery
   end
-  
+
 end
