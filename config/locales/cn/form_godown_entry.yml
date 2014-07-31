@@ -1,0 +1,15 @@
+zh_cn:
+  simple_form:
+    labels:
+      godown_entry:
+        godown_number: '入库单号'
+        warehouse: '仓库'
+        import_text: '粘贴excel内容到以下框中...'
+        create_godown_entry: '保存'
+
+    placeholders:
+      godown_entry:
+        godown_number: '请输入入库单号'
+        warehouse: '仓库名称'
+        import_text: '产品名称 | 终端号 | 价格'
+

@@ -2,13 +2,16 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :godown_number
-    = f.association :warehouse
-    导入Excel文件包含以下几列数据：产品名称 | 终端号 | 价格 |
+    .row
+      .col-md-6
+        = f.input :godown_number
+      .col-md-6
+        = f.association :warehouse
+
     = f.input :import_text, as: :text
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, '保存'
 
 - t_items = 0
 - t_amount = 0.0
