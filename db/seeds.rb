@@ -1,5 +1,5 @@
 Employee.create!([
-  {email: "solo123@21cn.com", password: 'liang123', password_confirmation: 'liang123' }
+  {email: "solo123@21cn.com", password: 'liang123', password_confirmation: 'liang123', roles: 'admin' }
 ])
 GodownEntry.create!([
   {godown_number: "GD001", product_id: 1, warehouse_id: 1, total_items: 5, total_amount: "3000.0", status: 0, creator_id: 1}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140730024919) do
+ActiveRecord::Schema.define(version: 20140731025035) do
 
   create_table "account_histories", force: true do |t|
     t.integer  "account_id"
@@ -148,6 +148,23 @@ ActiveRecord::Schema.define(version: 20140730024919) do
     t.string   "tel"
     t.string   "email"
     t.string   "qq"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "prepare_data", force: true do |t|
+    t.string   "c0"
+    t.string   "c1"
+    t.string   "c2"
+    t.string   "c3"
+    t.string   "c4"
+    t.string   "c5"
+    t.string   "c6"
+    t.string   "c7"
+    t.string   "c8"
+    t.string   "c9"
+    t.integer  "usage"
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -16,6 +16,7 @@
       %td
         %table.table.table-bordered.table-striped.table-hover
           - ProductsWarehouses.where(warehouse_id: warehouse).each do |pw|
+            - next unless pw.product && pw.store_item != 0
             %tr
               %td= pw.product.name if pw.product
               %td= pw.store_item
