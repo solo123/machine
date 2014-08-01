@@ -16,10 +16,24 @@
       %ul.nav.navbar-nav
         %li.active
           = link_to '入库', godown_entries_path
-        %li
-          = link_to '库存', warehouses_path
-        %li
-          = link_to '出库单', orders_path
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            库存
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              = link_to '各仓库库存', warehouses_path
+            %li
+              = link_to '序列号清单', godown_items_path
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            出库
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              = link_to '出库单', orders_path
+            %li
+              = link_to '未付款客户', accounts_path
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             数据

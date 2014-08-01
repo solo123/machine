@@ -1,21 +1,20 @@
-%h1 Listing accounts
 
-%table
+%table.table.table-bordered.table-striped.table-hover.search-table
   %tr
-    %th Partner
-    %th Current balance
-    %th
-    %th
-    %th
+    %th 合作伙伴
+    %th 联系人
+    %th 电话
+    %th QQ
+    %th Email
+    %th 未付货款
+    %th 更新日期
 
-  - @accounts.each do |account|
+  - @collection.each do |account|
     %tr
-      %td= account.partner_id
-      %td= account.current_balance
-      %td= link_to 'Show', account
-      %td= link_to 'Edit', edit_account_path(account)
-      %td= link_to 'Destroy', account, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Account', new_account_path
+      %td= account.partner.partner_name
+      %td= best_in_place account.partner, :contact, type: :input
+      %td= best_in_place account.partner, :tel, type: :input
+      %td= best_in_place account.partner, :qq, type: :input
+      %td= best_in_place account.partner, :email, type: :input
+      %td.num= number_with_delimiter account.balance
+      %td= account.updated_at
