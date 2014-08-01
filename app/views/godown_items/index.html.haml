@@ -1,20 +1,23 @@
-%table.table.table-bordered.table-striped.table-hover.search-table
-  %tr
-    %th 入库单
-    %th 产品
-    %th 终端编号
-    %th 机身序号
-    %th 入库价格
-    %th 数量
-    %th 金额
+%table.table.table-bordered.table-striped.table-hover.search-table.sum-table
+  %thead
+    %tr
+      %th 入库单
+      %th 产品
+      %th 终端编号
+      %th 机身序号
+      %th 入库价格
 
+  %tbody
   - @collection.each do |godown_item|
     %tr
       %td= link_to godown_item.godown_entry.godown_number, godown_entry_path(godown_item.godown_entry)
       %td= godown_item.product.name if godown_item.product
       %td= godown_item.terminal_code
       %td= godown_item.sn_code
-      %td= godown_item.price
-      %td= godown_item.items
-      %td= godown_item.amount
+      %td.num.price= best_in_place godown_item, :price, type: :input
 
+  %tfoot
+    %tr
+      %td{colspan: 3} 合计：
+      %td.num= "共 #{@collection.count} 台"
+      %td.num.sum_price
