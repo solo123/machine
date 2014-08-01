@@ -3,7 +3,7 @@
 one:
   godown_entry_id: 1
   product_id: 1
-  terminal_code: MyString
+  terminal_code: t_001
   model: MyString
   sn_code: MyString
   price: 9.99
@@ -14,7 +14,7 @@ one:
 two:
   godown_entry_id: 2
   product_id: 1
-  terminal_code: MyString
+  terminal_code: t_002
   model: MyString
   sn_code: MyString
   price: 9.99

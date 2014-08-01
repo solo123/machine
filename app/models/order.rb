@@ -21,26 +21,6 @@ class Order < ActiveRecord::Base
     self.total_amount = self.order_items.sum(:amount)
     self.save
   end
-  def delivery
-    return false unless valid_for_order
-    recaculate
-
-    self.order_items.each do |item| 
-      if item.status == 0
-        ProductsWarehouses.add(item.godown_item.warehouse, item.product, -1, self)
-        item.status = 1
-        item.save
-      end
-    end
-    self.status = 1 if self.order_items.where('status < 1').count == 0
-    p = self.partner
-    if p
-      p.account = p.build_account unless p.account
-      p.account.add(self.total_amount, self)
-    end
-    self.save
-
-  end
   def pay(amount)
     return false unless valid_for_pay
     p = self.order_payments.build

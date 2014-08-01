@@ -20,7 +20,8 @@ class OrdersController < ResourcesController
   end
   def delivery
     load_object
-    @object.delivery
+    biz = Biz::OrderBiz.new
+    biz.delivery(@object)
     redirect_to @object
   end
 

@@ -38,14 +38,6 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal 1, order.total_items
   end
 
-  test 'delivery order' do
-    order = order1
-    assert order.save, 'save order error'
-    assert order.recaculate, 'recaculate false'
-
-    order.delivery
-  end
-
   test 'import' do
     import_text = %(
 ord001\t20140601\tt0001\t张三\tabc

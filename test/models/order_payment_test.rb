@@ -20,9 +20,10 @@ class OrderPaymentTest < ActiveSupport::TestCase
   end
   test "order payment and partner account" do
     order = orders(:order_200)
+    order_biz = Biz::OrderBiz.new
 
     assert order.valid_for_order
-    assert order.delivery
+    assert order_biz.delivery(order)
     acc = order.partner.account
     assert_equal 1, order.status
     assert_equal 200, acc.balance 

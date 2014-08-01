@@ -1,8 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   order_date: 2014-06-23
-  order_number: MyString
+  order_number: order_001
   partner_id: 1
   contact_name: 'user 1'
   total_items: 1
