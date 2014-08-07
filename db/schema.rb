@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731025035) do
+ActiveRecord::Schema.define(version: 20140807031516) do
 
   create_table "account_histories", force: true do |t|
     t.integer  "account_id"
@@ -123,6 +123,8 @@ ActiveRecord::Schema.define(version: 20140731025035) do
     t.decimal  "balance",        precision: 2, scale: 12, default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "notes"
+    t.integer  "status",                                  default: 0
   end
 
   create_table "orders", force: true do |t|

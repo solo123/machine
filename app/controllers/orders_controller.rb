@@ -30,6 +30,18 @@ class OrdersController < ResourcesController
     Order.import(params[:import_text])
     redirect_to orders_path
   end
+
+  def pay
+    load_object
+    amount = params[:amount].to_f
+    puts "AMOUNT:" + params[:amount]
+    if amount > 0
+      @object.pay(amount, params[:notes])
+    else
+      flash[:notice] = '请输入支付金额!'
+    end
+    redirect_to @object
+  end
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params

@@ -1,0 +1,5 @@
+= form_tag pay_order_path(@object) do
+  = text_field_tag 'amount', '', placeholder: '金额'
+  = text_field_tag 'notes', '' , placeholder: '付款说明'
+  = submit_tag 'Pay'
+

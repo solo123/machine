@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :payments
+
   root 'home#index'
   resources :home
   resources :account_balances
@@ -55,6 +57,7 @@ Rails.application.routes.draw do
       get :delivery
       post :add_item
       get :recaculate
+      post :pay
     end
   end
 

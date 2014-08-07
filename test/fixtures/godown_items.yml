@@ -32,6 +32,7 @@ gd_100:
   items: 1
   amount: 30
   status: 1
+
 gd_200:
   id: 200
   product_id: 1
@@ -41,4 +42,4 @@ gd_200:
   price: 200
   items: 1
   amount: 200
-  status: 0
+  status: 1

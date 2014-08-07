@@ -23,12 +23,21 @@ class OrderPaymentTest < ActiveSupport::TestCase
     order_biz = Biz::OrderBiz.new
 
     assert order.valid_for_order
-    assert order_biz.delivery(order)
     acc = order.partner.account
+    assert_difference('acc.balance', 1200.01) do
+      assert order_biz.delivery(order)
+    end
     assert_equal 1, order.status
-    assert_equal 200, acc.balance 
+    assert_equal order.total_amount, order.balance
 
-    assert order.pay(100)
-    assert_equal 100, acc.balance
+    assert_difference('acc.balance', -100) do
+      order.pay(100, 'test 100')
+    end
+    assert_equal order.total_amount - 100, order.balance
+    
+    assert_difference('acc.balance', -200) do
+      order.pay(200, 'test 200')
+    end
+    assert_equal order.total_amount - 300, order.balance
   end
 end

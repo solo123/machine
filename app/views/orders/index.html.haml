@@ -13,22 +13,26 @@
   %tr
     %th 订单日期
     %th 订单号
-    %th 供应商
+    %th 代理商
+    %th 联系人
     %th 数量
     %th 金额
+    %th 未付款金额
+    %th 备注
     %th 状态
-    %th
+    %th 操作
 
   - @collection.each do |order|
     %tr
       %td= order.order_date
       %td= order.order_number
-      %td= order.partner_id
+      %td= order.partner.partner_name if order.partner
       %td= order.contact_name
       %td= order.total_items
       %td= order.total_amount
+      %td= order.balance
       %td= order.notes
-      %td= order.status
+      %td= status_text order
       %td
         = link_to '详情', order
         |

@@ -21,11 +21,12 @@ class Order < ActiveRecord::Base
     self.total_amount = self.order_items.sum(:amount)
     self.save
   end
-  def pay(amount)
+  def pay(amount, notes = nil)
     return false unless valid_for_pay
     p = self.order_payments.build
     p.balance_before = self.balance
     p.pay_amount = amount
+    p.notes = notes
     self.balance = p.balance = p.balance_before - amount
     p.save
     self.partner.account.add(-amount, self, p) if self.partner && self.partner.account

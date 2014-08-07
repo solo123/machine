@@ -70,4 +70,27 @@
 
 %p
 
+= render 'form_payment'
 
+%table.table.table-bordered.table-striped.table-hover
+  %thead
+    %tr
+      %th 付款日期
+      %th 付款前余额
+      %th 金额
+      %th 当前余额
+      %th 付款说明
+
+  %tbody
+    - @object.order_payments.each do |p|
+      %tr
+        %td= p.created_at
+        %td= p.balance_before
+        %td= p.pay_amount
+        %td= p.balance
+        %td= p.notes
+  %tfoot
+    %tr
+      %td
+      %td
+      %td

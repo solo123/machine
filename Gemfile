@@ -1,4 +1,4 @@
-source 'http://ruby.taobao.org'
+source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -56,3 +56,7 @@ gem 'seed_dump'
 group :test do
   gem 'pry-byebug'
 end
+group :development, :test do
+  gem 'railroady'
+end
+
