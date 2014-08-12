@@ -1,12 +1,25 @@
-%p#notice= notice
+.toolbox
+  = link_to 'Back', accounts_path
+
+- if @object.partner
+  %p
+    %b 合作伙伴：
+    = @object.partner.partner_name
+
+    %b 联系人：
+    = best_in_place @object.partner, :contact, type: :input
+
+    %b 电话：
+    = best_in_place @object.partner, :tel, type: :input
+
+    %b QQ：
+    = best_in_place @object.partner, :qq, type: :input
+
+    %b Email：
+    = best_in_place @object.partner, :email, type: :input
 
 %p
-  %b Partner:
-  = @account.partner_id
-%p
-  %b Current balance:
-  = @account.current_balance
+  %b 当前余额：
+  = @object.balance
 
-= link_to 'Edit', edit_account_path(@account)
-\|
-= link_to 'Back', accounts_path
+=render 'account_history'

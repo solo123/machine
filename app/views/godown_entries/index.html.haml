@@ -15,8 +15,8 @@
   - @collection.each do |godown_entry|
     %tr
       %td= godown_entry.godown_number
-      %td= godown_entry.total_items
-      %td= godown_entry.total_amount
+      %td.num= godown_entry.total_items
+      %td.num= number_with_delimiter godown_entry.total_amount
       %td= status_text(godown_entry)
       %td= godown_entry.creator
       %td= godown_entry.notes

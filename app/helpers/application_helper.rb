@@ -48,7 +48,7 @@ module ApplicationHelper
     elsif classname == 'GodownItem'
       %w"新单 已入库 xx xx xx xx"[obj.status]
     elsif classname == 'Order'
-      %w"[新单] 已出库 已付款 xx xx xx"[obj.status]
+      %w"[新单] 已出库 已付款 结清 xx xx"[obj.status]
     else
       "(#{classname}: #{obj.status})"
     end

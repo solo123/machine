@@ -1,0 +1,18 @@
+%table.table.table-bordered.table-striped.table-hover
+  %thead
+    %tr
+      %th 订单
+      %th 付款
+      %th 时间
+      %th 上次余额
+      %th 金额
+      %th 本次余额
+  %tbody
+    - @object.account_histories.each do |h|
+      %tr
+        %td= link_to h.order.order_number, h.order if h.order
+        %td= h.order_payment_id
+        %td= h.created_at
+        %td= h.balance_before
+        %td= h.amount
+        %td= h.balance
