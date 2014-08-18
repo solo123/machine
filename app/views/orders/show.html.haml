@@ -1,27 +1,26 @@
 .toolbox
-  - if @object.status == 0
-    = link_to '出库', delivery_order_path(@object), class: 'btn btn-info', confirm: '确认出库吗？'
-    |
-  - else
-    已出库
-    |
-  = link_to '重算', recaculate_order_path(@object)
-  |
   = link_to '订单列表', orders_path
   \|
-  = link_to '修改', edit_order_path(@object)
-  - if @object.status == 0
+  - unless @object.status == 0
+    已出库
+    |
+  - else
+    = link_to '出库', delivery_order_path(@object), class: 'btn btn-info', confirm: '确认出库吗？'
+    |
+    = link_to '重算', recaculate_order_path(@object)
+    |
+    = link_to '修改', edit_order_path(@object)
     \|
     = link_to '删除', @object, :method => :delete, :data => { :confirm => '你确认删除吗？' }
 
-  = form_tag(add_item_order_path(@object), :class => 'form-inline', :role => 'form') do
-    .form-group
-      .label.sr-only 终端序号:
-      = autocomplete_field_tag 'find_product', '', autocomplete_godown_item_terminal_code_orders_path, :update_elements => {:id => '#godown_item_id'}, :class => 'form-control', :placeholder => '快速查找', style: "width:300px;"
-    .form-group
-      .label.sr-only ID:
-      = text_field_tag 'godown_item_id', '', :class => 'form-control',  :readonly => true, :placeholder => '编号#', style: 'width: 120px'
-    = submit_tag  '添加', :class => 'btn btn-info'
+    = form_tag(add_item_order_path(@object), :class => 'form-inline', :role => 'form') do
+      .form-group
+        .label.sr-only 终端序号:
+        = autocomplete_field_tag 'find_product', '', autocomplete_godown_item_terminal_code_orders_path, :update_elements => {:id => '#godown_item_id'}, :class => 'form-control', :placeholder => '快速查找', style: "width:300px;"
+      .form-group
+        .label.sr-only ID:
+        = text_field_tag 'godown_item_id', '', :class => 'form-control',  :readonly => true, :placeholder => '编号#', style: 'width: 120px'
+      = submit_tag  '添加', :class => 'btn btn-info'
 
 %p
   %b 订单日期:
@@ -51,21 +50,23 @@
         %td= "#{item.product.catalog} #{item.product.name}" if item.product
         %td= item.godown_item.terminal_code if item.godown_item
         %td= item.godown_item.model if item.godown_item
-        %td= best_in_place item, :price, type: :input
-        %td= item.items
-        %td= item.amount
+        %td.num
+          - if item.status == 0
+            = best_in_place item, :price, type: :input
+          - else
+            = item.price
+        %td.num= item.items
+        %td.num= item.amount
         %td= item.status
         %td
-          = link_to 'Show', item
-          |
-          = link_to 'Edit', edit_order_item_path(item)
-          |
-          = link_to 'Destroy', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          - if item.status == 0
+            |
+            = link_to 'Destroy', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
   %tfoot
     %tr
       %td{colspan: 3} 合计数量: #{@object.total_items}
-      %td 合计金额: #{@object.total_amount}
-      %td{colspan: 2} 未付金额: #{@object.balance}
+      %td.num 合计金额: #{@object.total_amount}
+      %td.num{colspan: 2} 未付金额: #{@object.balance}
       %td 状态: #{@object.status}
 
 
