@@ -8,6 +8,7 @@
   %li{class: "#{params[:cat] ? 'active' : ''}"}
     = link_to '全部', orders_path + "?cat=1"
         
+= will_paginate @collection
 - amount = tot_amount = 0.00
 - count = 0
 %table.table.table-bordered.table-striped.table-hover
@@ -49,3 +50,4 @@
       %td.num= count
       %td.num= number_with_delimiter tot_amount
       %td.num= number_with_delimiter amount
+= will_paginate @collection

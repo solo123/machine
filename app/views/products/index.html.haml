@@ -2,6 +2,7 @@
 
 %h1 产品列表
 
+= will_paginate @collection
 %table.table.table-bordered.table-striped.table-hover
   %thead
     %tr
@@ -25,3 +26,4 @@
           |
           = link_to '删除', product, :method => :delete, :data => { :confirm => '你确定删除吗？' }
 
+= will_paginate @collection
