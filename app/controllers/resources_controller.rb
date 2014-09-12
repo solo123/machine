@@ -67,7 +67,9 @@
     
     protected
       def load_collection
-        params[:q] ||= {}
+        if !params[:q] || params[:q] == ""
+          params[:q] = {}
+        end
         @q = object_name.classify.constantize.search(params[:q])
         pages = 20
         @collection = @q.result.paginate(:page => params[:page], :per_page => pages)
