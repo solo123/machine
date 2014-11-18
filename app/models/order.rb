@@ -3,6 +3,7 @@ class Order < ActiveRecord::Base
   has_many :order_payments, dependent: :destroy
 
   belongs_to :partner
+  default_scope { order('id desc')}
 
   attr_accessor :foo
 
