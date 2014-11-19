@@ -2,6 +2,7 @@
 .toolbox
   = toolbox_button '新增入库单', new_godown_entry_path
 
+= will_paginate @collection
 %table.table.table-bordered.table-striped.table-hover
   %tr
     %th 入库单号
@@ -27,4 +28,5 @@
         |
         = link_to '删除', godown_entry, :method => :delete, :data => { :confirm => '确定删除吗？' }
 
+= will_paginate @collection
 

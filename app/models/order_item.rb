@@ -13,9 +13,9 @@ class OrderItem < ActiveRecord::Base
       price = self.godown_item.product.sale_price
 
       self.product = self.godown_item.product
-      self.price = price
+      self.price = price unless self.price && self.price > 0.0
       self.items = 1 unless self.items
-      self.amount = price * self.items
+      self.amount = self.price * self.items
       self.save
     end
     true
