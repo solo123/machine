@@ -4,6 +4,9 @@ class GodownEntry < ActiveRecord::Base
   belongs_to :warehouse
   belongs_to :creator, class_name: 'Employee'
   attr_accessor :import_text
+  
+  default_scope { order('id desc') }
+
 
   after_save :import
 
