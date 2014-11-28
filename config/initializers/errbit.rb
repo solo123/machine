@@ -3,5 +3,5 @@ Airbrake.configure do |config|
   config.host    = '122.112.89.151'
   config.port    = 3001
   config.secure  = config.port == 443
-  config.development_environments = []
+  #config.development_environments = []
 end

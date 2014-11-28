@@ -58,4 +58,21 @@ module ApplicationHelper
   def object_url(object, options = {})
     send "#{object.class.name.underscore.split('/').last}_path", object, options
   end
+
+  def l(dt)
+    "#{dt.strftime('%Y-%m-%d')}" if dt 
+  end
+  def sheet_name(sheet)
+    if sheet.is_a? Order
+      if sheet.partner
+        "#{sheet.partner.partner_name} (订单:#{sheet.id})"
+      else
+        "订单: #{sheet.id}"
+      end
+    elsif sheet.is_a? GodownEntry
+      "入库单: #{sheet.godown_number}"
+    else
+      "#{sheet.class}(#{sheet.id})"
+    end
+  end
 end

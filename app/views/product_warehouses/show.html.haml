@@ -17,11 +17,11 @@
       %th 当前数量
       %th 日期
   %tbody
-    - ProductHistory.where(product: @object.product).where(warehouse: @object.warehouse).each do |item|
+    - ProductHistory.where(product: @object.product).where(warehouse: @object.warehouse).order('id desc').each do |item|
       %tr
-        %td= link_to "#{item.operate_sheet_type}(#{item.operate_sheet_id})", object_url(item.operate_sheet)
-        %td= item.before_items
-        %td= item.change_items
-        %td= item.now_items
-        %td= item.updated_at
+        %td= link_to sheet_name(item.operate_sheet), object_url(item.operate_sheet)
+        %td.num= item.before_items
+        %td.num= item.change_items
+        %td.num= item.now_items
+        %td=l item.updated_at
 
