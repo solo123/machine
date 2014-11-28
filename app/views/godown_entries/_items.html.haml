@@ -8,30 +8,25 @@
       %th 数量
       %th 金额
       %th 状态
-      %th
   %tbody
     - @object.godown_items.each do |godown_item|
       %tr
         %td= godown_item.product.name if godown_item.product
-        %td= godown_item.terminal_code
-        %td= godown_item.sn_code
-        %td= godown_item.price
-        %td= godown_item.items
+        %td= best_in_place godown_item, :terminal_code, type: :input
+        %td= best_in_place godown_item, :sn_code, type: :input
+        %td= best_in_place godown_item, :price, type: :input
+        %td= best_in_place godown_item, :items, type: :input
         %td= godown_item.amount
         %td= status_text(godown_item)
-        %td
-          = link_to '详情', godown_item
-          |
-          = link_to '修改', edit_godown_item_path(godown_item)
-          |
-          = link_to '删除', godown_item, :method => :delete, :data => { :confirm => '你确定删除吗？' }
   %tfoot
     %tr
       %td{colspan: 4} 合计：
       %td= @object.total_items
       %td= @object.total_amount
       %td= status_text(@object)
-      %td 
+    %tr
+      %td{colspan: 4} &nbsp;
+      %td{colspan: 3}
         制单人：
         = @object.creator.display_name if @object.creator
 
